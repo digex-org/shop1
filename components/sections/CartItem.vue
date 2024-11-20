@@ -27,7 +27,7 @@
           <option v-for="n in 10" :key="n" :value="n">{{ n }}</option>
         </select>
         <a href="#" class="text-sm text-gray-500 hover:underline">Save for later</a>
-        <a href="#" class="text-sm text-gray-500 hover:underline">Remove</a>
+        <button @click="handleRemoveItem(product.id)" class="text-sm text-gray-500 hover:underline">Remove</button>
       </div>
     </div>
   </div>
@@ -35,8 +35,11 @@
 
 <script setup>
 import { defineProps } from 'vue';
+import {useCart} from "~/composables/useCart.js";
 
-// Define props to receive product data
+const { removeItem } = useCart();
+
+
 const props = defineProps({
   product: {
     type: Object,
@@ -44,6 +47,9 @@ const props = defineProps({
   }
 });
 
+const handleRemoveItem = (id) => {
+  removeItem(id);
+}
 </script>
 
 <style scoped>

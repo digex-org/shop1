@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-start justify-center min-h-screen text-center p-4">
+  <div class="flex flex-col items-start justify-start min-h-screen text-center p-4">
     <h1 class="text-2xl font-semibold mb-2">Your Shopping Cart Is Empty</h1>
     <p class="text-gray-600 mb-4">Save big on our <NuxtLink to="/" class="underline">Featured Sales</NuxtLink>.</p>
 
@@ -34,5 +34,5 @@ export default {
 </script>
 
 <style scoped>
-/* Add any custom styles if necessary */
+
 </style>
