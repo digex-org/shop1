@@ -18,7 +18,7 @@
     <hr class="mb-4" />
     <div class="flex justify-between font-semibold text-lg mb-4">
       <span>Total</span>
-      <span>${{ total }}</span>
+      <span>${{ total.toFixed(2) }}</span>
     </div>
     <p class="text-sm text-gray-500 mb-4">You Save ${{ savings }}</p>
     <NuxtLink to="/checkout">

@@ -31,9 +31,9 @@ export const useCart = () => {
     const addItem = (item) => {
         const existingItem = state.cartItems.find((cartItem) => cartItem.id === item.id);
         if (existingItem) {
-            existingItem.quantity += 1;
+            existingItem.quantity += item.quantity;
         } else {
-            state.cartItems.push({ ...item, quantity: 1 });
+            state.cartItems.push({ ...item });
         }
     };
 
@@ -48,11 +48,11 @@ export const useCart = () => {
         cartItems: state.cartItems,
         totalItems,
         itemSubtotal,
+        deliveryFee,
         estimatedTax,
         total,
         savings,
         addItem,
         removeItem,
-        deliveryFee,
     };
 };
