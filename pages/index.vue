@@ -63,14 +63,12 @@ export default {
         perPage: 1,
         speed: 500,
         pagination: true,
-        navigation: true,
         controls: false,
       },
       imageSettings : {
         slidesPerView: 5,
         spaceBetween: 20,
         loop: true,
-        navigation: true,
         pagination: true,
       }
     };

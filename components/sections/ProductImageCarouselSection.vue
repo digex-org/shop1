@@ -31,10 +31,9 @@
       <swiper
           ref="mainSwiper"
           @swiper="onMainSwiper"
-      @slideChange="onSlideChange"
-      navigation
-      loop
-      class="main-swiper"
+          @slideChange="onSlideChange"
+          loop
+          class="main-swiper"
       >
       <swiper-slide v-for="(image, index) in images" :key="index">
         <img
@@ -52,7 +51,6 @@
 import { ref } from 'vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
-import 'swiper/css/navigation';
 import 'swiper/css/free-mode';
 
 const props = defineProps({
