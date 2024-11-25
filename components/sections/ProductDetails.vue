@@ -1,6 +1,7 @@
 <template>
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-    <ProductImageCarouselSection :images="product.images" />
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 p-4">
+    <ProductImageCarouselSection :images="product.images" class="w-full" />
+
     <div class="space-y-6">
       <h1 class="text-2xl font-bold">{{ product.name }}</h1>
       <p class="text-gray-500">{{ product.description }}</p>
@@ -12,8 +13,10 @@
 
       <p class="text-sm text-gray-600">Arrives by {{ deliveryDate }}</p>
 
-      <QuantitySelector :initialQuantity="quantity" @update:quantity="updateQuantity" />
-      <AddToCartButton :product="product" :quantity="quantity" />
+      <div class="flex flex-col sm:flex-row gap-4">
+        <QuantitySelector :initialQuantity="quantity" @update:quantity="updateQuantity" class="flex-1" />
+        <AddToCartButton :product="product" :quantity="quantity" class="flex-1" />
+      </div>
     </div>
   </div>
 </template>
