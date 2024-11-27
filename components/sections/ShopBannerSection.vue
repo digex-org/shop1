@@ -13,12 +13,10 @@
   </section>
 </template>
 
-<script>
-  export default {
-    props: {
-      backgroundImage: {
-        type: String
-      }
-    }
+<script setup>
+defineProps ({
+  backgroundImage: {
+    type: String
   }
+});
 </script>

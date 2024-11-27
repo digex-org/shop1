@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto px-4 py-8">
+  <section class="container mx-auto px-4 py-8">
     <!-- Header with Back to Shopping Link -->
     <div class="text-sm mb-4">
       <a href="#" class="text-gray-600 hover:underline">← Back To Shopping</a>
@@ -26,11 +26,11 @@
         <!-- Payment Options -->
         <div class="mt-6 p-4 border rounded-lg">
           <p class="text-sm text-gray-600">Pay in 4 interest-free payments of ${{ (total / 4).toFixed(2) }} with Klarna or Afterpay.</p>
-          <img src="/images/product.webp" alt="Payment Options" class="mt-4 w-1/2 mx-auto" />
+          <img src="/images/product.webp" alt="Payment Options" class="mt-4 w-1/2 mx-auto" loading="lazy" />
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup>

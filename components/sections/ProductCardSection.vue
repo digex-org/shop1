@@ -1,11 +1,12 @@
 <template>
-  <div
+  <section
       class="group relative bg-white border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-transform duration-300"
   >
     <img
         :src="product.image"
         alt="Product Image"
         class="w-full h-48 sm:h-64 md:h-72 object-cover group-hover:scale-110 transition-transform duration-300"
+        loading="lazy"
     />
     <div class="p-4">
       <h3 class="font-medium text-base md:text-lg">{{ product.title }}</h3>
@@ -21,7 +22,7 @@
         Limited Time Only
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 

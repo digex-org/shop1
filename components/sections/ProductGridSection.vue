@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4">
+  <section class="p-4">
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
       <ProductCardSection
           v-for="(product, index) in products"
@@ -7,7 +7,7 @@
           :product="product"
       />
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup>
