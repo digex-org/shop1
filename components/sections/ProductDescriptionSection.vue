@@ -1,6 +1,6 @@
 <template>
-  <div class="p-4">
-<SectionTitle :title="'About this item'" />
+  <section class="p-4">
+  <SectionTitle :title="'About this item'" />
     <!-- Tabs Navigation -->
     <div class="flex border-b">
       <button
@@ -46,7 +46,7 @@
         <p class="text-gray-700">{{ tabs[2].content }}</p>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 

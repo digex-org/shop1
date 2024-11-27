@@ -1,9 +1,13 @@
 <template>
-  <div class="swiper-container">
-    <swiper
-        v-bind="settings"
-    >
-      <swiper-slide v-for="(item, index) in items" :key="index">
+  <section class="swiper-container w-full">
+    <swiper v-bind="settings" class="w-full">
+      <!-- Slides -->
+      <swiper-slide
+          v-for="(item, index) in items"
+          :key="index"
+          class="flex flex-col items-center justify-center"
+      >
+        <!-- Video Slide -->
         <template v-if="item.type === 'video'">
           <video
               :src="item.src"
@@ -14,97 +18,72 @@
               class="w-full h-auto"
           ></video>
         </template>
+
+        <!-- Image Slide -->
         <template v-else-if="item.type === 'image'">
-          <img :src="item.src" alt="Slide Image" class="w-full h-auto object-cover" />
-          <p class="slide-title">{{ item.name }}</p>
-          <p class="slide-price">
-            <span class="current-price">{{ item.currentPrice }}</span>
-            <span v-if="item.originalPrice" class="original-price">{{ item.originalPrice }}</span>
-          </p>
+          <img
+              :src="item.src"
+              alt="Slide Image"
+              class="w-full h-auto object-cover rounded-lg shadow-lg"
+              loading="lazy"
+          />
+          <div class="mt-4 text-center">
+            <p class="text-lg font-bold text-gray-800">{{ item.name }}</p>
+            <p class="text-red-500 font-semibold">
+              <span class="text-xl">{{ item.currentPrice }}</span>
+              <span
+                  v-if="item.originalPrice"
+                  class="text-gray-400 ml-2 line-through"
+              >
+                {{ item.originalPrice }}
+              </span>
+            </p>
+          </div>
         </template>
-        <div v-else class="product-item">
-          <img :src="item.src" alt="Product Image" class="w-full h-auto object-cover mb-2">
-          <p class="text-center text-gray-800 font-semibold">{{ item.name }}</p>
-          <p class="text-center text-gray-600">{{ item.price }}</p>
-        </div>
+
+        <!-- Product Slide -->
+        <template v-else>
+          <div class="flex flex-col items-center">
+            <img
+                :src="item.src"
+                alt="Product Image"
+                class="w-full h-auto object-cover mb-4 rounded-lg shadow-md"
+                loading="lazy"
+            />
+            <p class="text-center text-gray-800 font-semibold">{{ item.name }}</p>
+            <p class="text-center text-gray-600">{{ item.price }}</p>
+          </div>
+        </template>
       </swiper-slide>
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
     </swiper>
-  </div>
+  </section>
 </template>
 
-<script>
+<script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper-bundle.css';
 
-export default {
-  components: {
-    Swiper,
-    SwiperSlide,
+defineProps({
+  items: {
+    type: Array,
+    required: true,
   },
-  props: {
-    items: {
-      type: Array,
-      required: true,
-    },
-    settings: {
-      type: Object,
-      default: () => ({}),
-    },
+  settings: {
+    type: Object,
+    default: () => ({}),
   },
-  methods: {
-    onVideoEnd(event) {
-      const videoElement = event.target;
-      videoElement.currentTime = 0;
-      videoElement.play();
-    },
-  },
+});
+
+const onVideoEnd = (event) => {
+  const videoElement = event.target;
+  videoElement.currentTime = 0;
+  videoElement.play();
 };
 </script>
 
 <style scoped>
 .swiper-container {
   width: 100%;
-  max-width: 100%;
   overflow: hidden;
-}
-.product-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.slide-image {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-.slide-title {
-  font-weight: 600;
-  margin-top: 8px;
-  color: #333;
-}
-
-.slide-price {
-  color: #d32f2f;
-  font-weight: bold;
-}
-
-.current-price {
-  color: #d32f2f;
-}
-
-.original-price {
-  text-decoration: line-through;
-  color: #888;
-  margin-left: 8px;
-}
-
-.swiper-button-next,
-.swiper-button-prev {
-  color: #333;
-  background-color: white;
-  padding: 30px;
 }
 </style>

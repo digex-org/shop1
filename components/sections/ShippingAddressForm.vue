@@ -90,8 +90,4 @@
   const name = ref("");
   const address = ref("");
   const apartment = ref("");
-
-  function handleSubmit() {
-  console.log("Name submitted:", name.value);
-}
 </script>

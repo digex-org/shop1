@@ -5,6 +5,7 @@
         :src="item.image"
         alt="Product Image"
         class="w-16 h-16 rounded-lg object-cover"
+        loading="lazy"
     />
 
     <!-- Product Details -->

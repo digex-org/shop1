@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-col md:flex-row items-start md:items-center border p-4 mb-4">
+  <section class="flex flex-col md:flex-row items-start md:items-center border p-4 mb-4">
     <!-- Product Image -->
     <div class="flex-shrink-0">
-      <img :src="product.image" :alt="product.name" class="w-24 h-24 object-cover rounded-md mb-4 md:mb-0" />
+      <img :src="product.image" :alt="product.name" class="w-24 h-24 object-cover rounded-md mb-4 md:mb-0" loading="lazy"/>
     </div>
 
     <!-- Product Details -->
@@ -30,7 +30,7 @@
         <button @click="handleRemoveItem(product.id)" class="text-sm text-gray-500 hover:underline">Remove</button>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup>

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex space-x-4">
+  <section class="flex space-x-4">
     <!-- Vertical Thumbnail Navigation -->
     <div class="flex flex-col space-y-2">
       <swiper
@@ -21,6 +21,7 @@
             :alt="'Thumbnail ' + index"
             class="rounded-lg object-cover w-16 h-16 border border-gray-200 hover:border-black"
             :class="index === activeIndex ? 'border-black' : ''"
+            loading="lazy"
         />
       </swiper-slide>
       </swiper>
@@ -39,12 +40,13 @@
         <img
             :src="image"
             :alt="'Product Image ' + index"
+            loading="lazy"
             class="rounded-lg"
         />
       </swiper-slide>
       </swiper>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup>

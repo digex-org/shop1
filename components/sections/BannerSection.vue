@@ -1,7 +1,7 @@
 <template>
-<div>
-  <img :src="banner" alt="banner">
-</div>
+<section>
+  <img :src="banner" alt="banner" loading="lazy">
+</section>
 </template>
 
 <script>

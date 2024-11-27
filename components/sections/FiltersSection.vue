@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 bg-gray-50 lg:block">
+  <section class="p-4 bg-gray-50 lg:block">
     <!-- Category Filter -->
     <div>
       <h4 class="font-semibold mb-4 py-4 border-b">Category</h4>
@@ -22,7 +22,7 @@
       <h4 class="font-semibold mb-4 py-4 border-b">Filters</h4>
 
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup>

@@ -1,6 +1,6 @@
 <template>
 
-  <div class="border p-6 rounded-lg">
+  <section class="border p-6 rounded-lg">
     <h2 class="text-xl font-semibold mb-4">Order Summary ({{ totalItems }})</h2>
     <p v-if="deliveryFee === 0" class="text-sm text-green-600 mb-2">This order qualifies for Free Shipping!</p>
     <div class="flex justify-between text-gray-600 mb-2">
@@ -24,7 +24,7 @@
     <NuxtLink to="/checkout">
       <button class="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800">Proceed to Checkout</button>
     </NuxtLink>
-  </div>
+  </section>
 </template>
 
 <script setup>

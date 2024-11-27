@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 rounded-lg">
+  <section class="p-4 rounded-lg">
     <!-- Order Summary Header -->
     <div class="flex justify-between items-center border-b pb-2 mb-4">
       <h2 class="font-medium text-lg">Order Summary ({{ totalItems }})</h2>
@@ -44,7 +44,7 @@
       <p>${{ savings }}</p>
     </div>
 
-  </div>
+  </section>
 </template>
 
 

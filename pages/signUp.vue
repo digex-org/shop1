@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center justify-center min-h-screen bg-white p-4 sm:p-8">
     <!-- Logo -->
-    <img src="/images/logo/logo.png" alt="JOSS & MAIN" class="mb-4 w-24 sm:w-40" />
+    <img src="/images/logo/logo.png" alt="JOSS & MAIN" class="mb-4 w-24 sm:w-40" loading="lazy"/>
 
     <!-- Title and Instructions -->
     <h2 class="text-xl sm:text-2xl font-semibold text-gray-800 text-center">Enter your email address to sign in or to create an account</h2>
