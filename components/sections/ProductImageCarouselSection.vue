@@ -1,34 +1,51 @@
 <template>
-  <section class="flex space-x-4">
+  <section class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
     <!-- Vertical Thumbnail Navigation -->
-    <div class="flex flex-col space-y-2">
+    <div class="flex md:flex-col space-x-2 md:space-y-2 md:space-x-0 overflow-auto">
       <swiper
           direction="vertical"
           slides-per-view="5"
           free-mode
           space-between="10"
-          class="thumbnail-slider max-h-[400px]"
+          class="thumbnail-slider max-h-[400px] !hidden md:!block"
           @swiper="onThumbnailSwiper"
       >
-      <swiper-slide
-          v-for="(image, index) in images"
-          :key="index"
-          @click="onThumbnailClick(index)"
-          class="cursor-pointer"
-      >
-        <img
-            :src="image"
-            :alt="'Thumbnail ' + index"
-            class="rounded-lg object-cover w-16 h-16 border border-gray-200 hover:border-black"
-            :class="index === activeIndex ? 'border-black' : ''"
-            loading="lazy"
-        />
-      </swiper-slide>
+        <swiper-slide
+            v-for="(image, index) in images"
+            :key="index"
+            @click="onThumbnailClick(index)"
+            class="cursor-pointer"
+        >
+          <img
+              :src="image"
+              :alt="'Thumbnail ' + index"
+              class="rounded-lg object-cover w-16 h-16 border border-gray-200 hover:border-black"
+              :class="index === activeIndex ? 'border-black' : ''"
+              loading="lazy"
+          />
+        </swiper-slide>
       </swiper>
+      <!-- Horizontal Thumbnail Navigation for smaller screens -->
+      <div class="flex md:hidden space-x-2 overflow-x-auto">
+        <div
+            v-for="(image, index) in images"
+            :key="index"
+            @click="onThumbnailClick(index)"
+            class="cursor-pointer"
+        >
+          <img
+              :src="image"
+              :alt="'Thumbnail ' + index"
+              class="rounded-lg object-cover w-16 h-16 border border-gray-200 hover:border-black"
+              :class="index === activeIndex ? 'border-black' : ''"
+              loading="lazy"
+          />
+        </div>
+      </div>
     </div>
 
     <!-- Main Image Slider -->
-    <div class="flex-grow w-4/5">
+    <div class="flex-grow w-full md:w-4/5">
       <swiper
           ref="mainSwiper"
           @swiper="onMainSwiper"
@@ -36,22 +53,22 @@
           loop
           class="main-swiper"
       >
-      <swiper-slide v-for="(image, index) in images" :key="index">
-        <img
-            :src="image"
-            :alt="'Product Image ' + index"
-            loading="lazy"
-            class="rounded-lg"
-        />
-      </swiper-slide>
+        <swiper-slide v-for="(image, index) in images" :key="index">
+          <img
+              :src="image"
+              :alt="'Product Image ' + index"
+              loading="lazy"
+              class="rounded-lg w-full object-cover max-h-[500px] md:max-h-[700px]"
+          />
+        </swiper-slide>
       </swiper>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { Swiper, SwiperSlide } from 'swiper/vue';
+import {ref} from 'vue';
+import {Swiper, SwiperSlide} from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 
