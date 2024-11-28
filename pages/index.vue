@@ -5,7 +5,7 @@
     <SliderSection class="py-7" :items="videoSlides" :settings="videoSettings" />
     <div class="container mx-auto px-4">
       <h3 class="text-center font-bold text-xl mt-8">Shop by Department</h3>
-      <DepartmentsSection :products="products" class-name="product-grid" />
+      <DepartmentsSection :products="products" class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"/>
       <SliderSection class="my-7 px-1" :items="videoSlides" :settings="videoSettings" />
       <BannerSection banner="/images/banner.webp" />
       <SliderSection class="my-7" :items="productsSlide" :settings="imageSettings" />
@@ -62,8 +62,3 @@ const imageSettings = {
 };
 </script>
 
-<style scoped>
-.product-grid {
-  @apply grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
-}
-</style>

@@ -1,23 +1,24 @@
 <template>
   <div class="container mx-auto py-8">
-    <div v-if="selectedCategoryNames.length" class="text-sm text-gray-600 mb-5">
+    <!-- Selected Categories -->
+    <div v-if="selectedCategoryNames.length" class="text-sm text-gray-600 mb-5 ml-2">
       Selected Categories: <span class="font-semibold">{{ selectedCategoryNames }}</span>
     </div>
+
     <button
         @click="toggleFilters"
-        class="flex items-center justify-center gap-2 mb-4 p-2 border border-gray-300 rounded-md hover:bg-gray-100"
+        class="flex items-center justify-center gap-2 mb-4 p-2 border border-gray-300 rounded-md hover:bg-gray-100 ml-2"
     >
       <i class="fa-solid fa-sliders"></i>
       {{ showFilters ? "Hide Filters" : "Show Filters" }}
     </button>
 
-    <div class="flex relative">
-      <!-- Filters Section -->
+    <div class="flex flex-col lg:flex-row relative">
       <transition name="slide">
         <FiltersSection
             v-if="showFilters"
             @update-filters="onFilterUpdate"
-            class="absolute z-10 bg-white shadow-lg p-4 lg:relative lg:shadow-none lg:w-1/4"
+            class="absolute z-10 bg-white shadow-lg p-4 w-full lg:relative lg:shadow-none lg:w-1/4 lg:block"
         />
       </transition>
 
@@ -29,12 +30,10 @@
   </div>
 </template>
 
-
-
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
-const showFilters = ref(true);
+const showFilters = ref(false); // Default to hidden on mobile for better UX
 const filters = ref({
   fastDelivery: false,
   categories: [],
@@ -91,6 +90,16 @@ const selectedCategoryNames = computed(() => {
 });
 </script>
 
-<style>
+<style scoped>
+/* Slide-in animation for filters */
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.3s ease;
+}
 
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateX(-100%);
+  opacity: 0;
+}
 </style>
