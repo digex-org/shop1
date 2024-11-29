@@ -3,7 +3,7 @@
     <ProductDetails class="my-7" :product="product" />
     <ProductDescriptionSection class="mb-7" />
     <SectionTitle :title="'We Think You’ll Love'" />
-    <DepartmentsSection :products="products" class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" />
+    <DepartmentsSection :products="products" class-name="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" />
   </div>
 </template>
 
