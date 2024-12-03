@@ -2,7 +2,7 @@
   <section>
     <nav class="border-b">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center py-4">
+        <div class="flex justify-center items-center py-4 gap-8">
           <div
               v-for="(menuItem, index) in mainMenu"
               :key="index"
@@ -10,7 +10,7 @@
           >
             <button
                 @click="toggleMenu(menuItem.label)"
-                class="text-xl font-bold text-gray-800"
+                class="text-gray-800 underline underline-offset-1 decoration-zinc-400"
             >
               {{ menuItem.label }}
             </button>
@@ -63,34 +63,6 @@ let submenuTimeout = null;
 
 const mainMenu = [
   {
-    label: 'Category',
-    submenu: [
-      {
-        label: 'Kitchen',
-        submenu: [
-          { label: 'Dishes', href: '#' },
-          { label: 'Glasses', href: '#' },
-          { label: 'For cooking', href: '#' },
-        ],
-      },
-      {
-        label: 'Bedroom',
-        submenu: [
-          { label: 'King size bed', href: '#' },
-          { label: 'Wardrobe', href: '#' },
-          { label: 'Nightstand', href: '#' },
-        ],
-      },
-      {
-        label: 'Living room',
-        submenu: [
-          { label: 'Sofas', href: '#' },
-          { label: 'Armchairs', href: '#' },
-        ]
-      }
-    ],
-  },
-  {
     label: 'New',
     submenu: [
       {
@@ -132,6 +104,44 @@ const mainMenu = [
       },
     ],
   },
+  {
+  label: 'Kitchen',
+  submenu: [
+      { label: 'Dishes', href: '#' },
+      { label: 'Glasses', href: '#' },
+      { label: 'For cooking', href: '#' },
+    ],
+  },
+  {
+    label: 'Bedroom',
+    submenu: [
+      { label: 'King size bed', href: '#' },
+      { label: 'Wardrobe', href: '#' },
+      { label: 'Nightstand', href: '#' },
+    ],
+  },
+  {
+    label: 'Living room',
+    submenu: [
+      { label: 'Sofas', href: '#' },
+      { label: 'Armchairs', href: '#' },
+    ]
+  },
+  {
+    label: 'Lighting',
+    submenu: [
+      { label: 'Chandeliers', href: '#' },
+      { label: 'Local lighting', href: '#' },
+      { label: 'Laps', href: '#' }
+    ]
+  },
+  {
+    label: 'Outdoor',
+    submenu: [
+      { label: 'Garden set', href: '#' }
+    ]
+  },
+
 ];
 const toggleMenu = (menu) => {
   if (activeMenu.value === menu) {

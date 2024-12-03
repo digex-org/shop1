@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-gray-200 p-6 flex flex-col lg:flex-row justify-center items-center space-y-6 lg:space-y-0 lg:space-x-8">
+  <section class="bg-gray-200 p-5 flex flex-col lg:flex-row justify-center items-center space-y-6 lg:space-y-0 lg:space-x-8">
     <!-- Left Text Section -->
     <div class="flex flex-col items-center lg:items-start text-center lg:text-left">
       <p class="text-sm font-semibold text-gray-800">BLACK FRIDAY EARLY ACCESS</p>
