@@ -1,5 +1,5 @@
 <template>
-  <div class="product-card">
+  <div class="product-card relative text-center p-1.5">
     <div>
       <img :src="product.image" :alt="product.name" class="product-image" loading="lazy" />
       <h3>{{ product.name }}</h3>
@@ -20,11 +20,6 @@ export default {
 </script>
 
 <style scoped>
-  .product-card {
-    position: relative;
-    padding: 5px;
-    text-align: center;
-  }
   .product-card::after {
     content: '';
     position: absolute;
