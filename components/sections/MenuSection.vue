@@ -3,39 +3,48 @@
     <nav class="border-b">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center py-4">
-          <button @click="toggleMenu" class="text-xl font-bold text-gray-800">Category</button>
-        </div>
-
-        <!-- Navigation Links -->
-        <div
-            :class="[
-            'absolute w-max bg-white shadow-md z-50 space-y-2 p-5 text-sm font-semibold text-gray-800 rounded-md',
-            isOpen ? 'block' : 'hidden',
-          ]"
-        >
           <div
-              v-for="(link, index) in links"
+              v-for="(menuItem, index) in mainMenu"
               :key="index"
               class="relative group"
-              @mouseenter="activateSubmenu(index)"
-              @mouseleave="deactivateSubmenu"
           >
-            <button class="hover:text-gray-600 flex items-center justify-between w-full lg:w-auto">
-              {{ link.label }}
+            <button
+                @click="toggleMenu(menuItem.label)"
+                class="text-xl font-bold text-gray-800"
+            >
+              {{ menuItem.label }}
             </button>
+
             <!-- Submenu -->
             <div
-                v-if="activeSubmenu === index"
-                class="absolute left-24 top-0 w-40 bg-white shadow-lg border rounded-md p-2 space-y-2 text-gray-800"
+                v-if="activeMenu === menuItem.label"
+                class="absolute left-0 top-full mt-2 w-max bg-white shadow-md z-50 space-y-2 p-5 text-sm font-semibold text-gray-800 rounded-md"
             >
-              <a
-                  v-for="(sublink, subIndex) in link.submenu"
-                  :key="subIndex"
-                  :href="sublink.href"
-                  class="block text-sm hover:text-gray-600"
+              <div
+                  v-for="(link, linkIndex) in menuItem.submenu"
+                  :key="linkIndex"
+                  class="relative group"
+                  @mouseenter="link.submenu ? activateSubmenu(linkIndex) : null"
+                  @mouseleave="deactivateSubmenu"
               >
-                {{ sublink.label }}
-              </a>
+                <button class="hover:text-gray-600 flex items-center justify-between w-full lg:w-auto">
+                  {{ link.label }}
+                </button>
+                <!-- Submenu for the category -->
+                <div
+                    v-if="link.submenu && activeSubmenu === linkIndex"
+                    class="absolute left-[calc(100%+20px)] top-0 w-40 bg-white shadow-lg border rounded-md p-2 space-y-2 text-gray-800"
+                >
+                  <a
+                      v-for="(sublink, subIndex) in link.submenu"
+                      :key="subIndex"
+                      :href="sublink.href"
+                      class="block text-sm hover:text-gray-600"
+                  >
+                    {{ sublink.label }}
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -47,92 +56,118 @@
 <script setup>
 import { ref } from 'vue';
 
-const isOpen = ref(false);
-
+const activeMenu = ref(null);
 const activeSubmenu = ref(null);
 
-// Navigation links with submenus
-const links = [
-  { label: 'New', href: '#', submenu: [
-      {label: 'New in Kitchen', href: '#'},
-      {label: 'New In Bedroom', href: '#'},
+let submenuTimeout = null;
+
+const mainMenu = [
+  {
+    label: 'Category',
+    submenu: [
+      {
+        label: 'Kitchen',
+        submenu: [
+          { label: 'Dishes', href: '#' },
+          { label: 'Glasses', href: '#' },
+          { label: 'For cooking', href: '#' },
+        ],
+      },
+      {
+        label: 'Bedroom',
+        submenu: [
+          { label: 'King size bed', href: '#' },
+          { label: 'Wardrobe', href: '#' },
+          { label: 'Nightstand', href: '#' },
+        ],
+      },
+      {
+        label: 'Living room',
+        submenu: [
+          { label: 'Sofas', href: '#' },
+          { label: 'Armchairs', href: '#' },
+        ]
+      }
+    ],
+  },
+  {
+    label: 'New',
+    submenu: [
+      {
+        label: 'New in Kitchen',
+        submenu: [
+          { label: 'New Dishes', href: '#' },
+          { label: 'New Utensils', href: '#' },
+        ],
+      },
+      {
+        label: 'New in Bedroom',
+        submenu: [
+          { label: 'New Beds', href: '#' },
+          { label: 'New Wardrobes', href: '#' },
+        ],
+      },
       {label: 'New in Living room', href: '#'},
       {label: 'New in Bathroom', href: '#'},
       {label: 'New in Outdoor', href: '#'},
       {label: 'New in Lighting', href: '#'},
-    ]
-  },
-  { label: 'Good Deal', href: '#', submenu:
-        [
-          {label: 'For sell', href: '#'},
-          {label: 'Last chance', href: '#'},
-        ]
-  },
-  {
-    label: 'Kitchen',
-    href: '#',
-    submenu: [
-      {label: 'Dishes', href: '#'},
-      {label: 'Glasses', href: '#'},
-      {label: 'For cooking', href: '#'},
     ],
   },
   {
-    label: 'Bedroom',
-    href: '#',
+    label: 'Good Deal',
     submenu: [
-      {label: 'King size bed', href: '#'},
-      {label: 'Wardrobe', href: '#'},
-      {label: 'Nightstand', href: '#'},
+      {
+        label: 'For Sale',
+        submenu: [
+          { label: 'Discounted Items', href: '#' },
+          { label: 'Flash Sale', href: '#' },
+        ],
+      },
+      {
+        label: 'Last Chance',
+        submenu: [
+          { label: 'Ending Soon', href: '#' },
+          { label: 'Clearance', href: '#' },
+        ],
+      },
     ],
-  },
-  {label: 'Living room', href: '#', submenu: [
-      {label: 'Sofas', href: '#'},
-      {label: 'Armchairs', href: '#'},
-    ]
-  },
-  {
-    label: 'Bathroom',
-    href: '#',
-    submenu: [
-      {label: 'Mirrors', href: '#'},
-      {label: 'Curtains', href: '#'},
-    ],
-  },
-  {label: 'Outdoor', href: '#', submenu: [
-      {label: 'Garden set', href: '#'}
-    ]
-  },
-  {label: 'Lighting', href: '#', submenu: [
-      {label: 'Chandeliers', href: '#'},
-      {label: 'Local lighting', href: '#'},
-      {label: 'Laps', href: '#'}
-    ]
   },
 ];
-
-// Toggle the main menu
-const toggleMenu = () => {
-  isOpen.value = !isOpen.value;
-
-  // Close submenu if the menu is closed
-  if (!isOpen.value) {
-    activeSubmenu.value = null;
+const toggleMenu = (menu) => {
+  if (activeMenu.value === menu) {
+    activeMenu.value = null;
+  } else {
+    activeMenu.value = menu;
   }
-};
-
-// Activate submenu on hover
-const activateSubmenu = (index) => {
-  if (links[index].submenu) {
-    activeSubmenu.value = index;
-  }
-};
-
-// Deactivate submenu on hover out
-const deactivateSubmenu = () => {
   activeSubmenu.value = null;
+};
+
+const activateSubmenu = (index) => {
+  if (submenuTimeout) {
+    clearTimeout(submenuTimeout);
+    submenuTimeout = null;
+  }
+  activeSubmenu.value = index;
+};
+
+const deactivateSubmenu = () => {
+  submenuTimeout = setTimeout(() => {
+    activeSubmenu.value = null;
+  }, 300);
 };
 </script>
 
 <style scoped>
+.relative .absolute {
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+}
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+.block {
+  visibility: visible;
+  opacity: 1;
+}
 </style>
+
