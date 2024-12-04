@@ -5,7 +5,7 @@
     <SliderSection class="py-7" :items="videoSlides" :settings="videoSettings" />
     <div class="container mx-auto px-4">
       <h3 class="text-center font-bold text-xl mt-8">Shop by Department</h3>
-      <DepartmentsSection :products="products" class-name="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"/>
+      <DepartmentsSection :categories="categories" class-name="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"/>
       <SliderSection class="my-7 px-1" :items="videoSlides" :settings="videoSettings" />
       <BannerSection banner="/images/banner.webp" />
       <SliderSection class="my-7" :items="productsSlide" :settings="imageSettings" />
@@ -15,19 +15,9 @@
 </template>
 
 <script setup>
+import { useCategory } from '~/composables/useCategory';
 
-const products = [
-  { id: '1', image: '/images/product.webp' },
-  { id: '2', image: '/images/product.webp' },
-  { id: '3', image: '/images/product.webp' },
-  { id: '4', image: '/images/product.webp' },
-  { id: '5', image: '/images/product.webp' },
-  { id: '6', image: '/images/product.webp' },
-  { id: '7', image: '/images/product.webp' },
-  { id: '8', image: '/images/product.webp' },
-  { id: '9', image: '/images/product.webp' },
-  { id: '10', image: '/images/product.webp' },
-];
+const { categories } = useCategory();
 
 const productsSlide = Array.from({ length: 10 }, () => ({
   type: 'image',

@@ -1,9 +1,9 @@
 <template>
   <div class="container mx-auto py-8">
     <!-- Selected Categories -->
-    <div v-if="selectedCategoryNames.length" class="text-sm text-gray-600 mb-5 ml-2">
+    <h1 v-if="selectedCategoryNames.length" class="text-sm text-gray-600 mb-5 ml-2">
       Selected Categories: <span class="font-semibold">{{ selectedCategoryNames }}</span>
-    </div>
+    </h1>
 
     <button
         @click="toggleFilters"
@@ -32,42 +32,17 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-
+import { useProduct } from '~/composables/useProduct';
 const showFilters = ref(false); // Default to hidden on mobile for better UX
 const filters = ref({
   fastDelivery: false,
   categories: [],
 });
 
-const products = ref([
-  {
-    image: '/images/product.webp',
-    title: 'Gwennie 24" Metal Wall Clock',
-    price: '$85',
-    rating: '4.5/5',
-    isLimitedTime: true,
-    category: 'Wall Clocks',
-  },
-  {
-    image: '/images/product.webp',
-    title: 'Lowri 30.22" Wood Wall Clock',
-    price: '$79',
-    rating: '4.7/5',
-    isLimitedTime: false,
-    category: 'Wall Clocks',
-  },
-  {
-    image: '/images/product.webp',
-    title: 'Tillie 2.1" Wood Wall Clock',
-    price: '$75',
-    rating: '4.3/5',
-    isLimitedTime: true,
-    category: 'Wall Decor',
-  },
-]);
+const { products } = useProduct();
 
 const filteredProducts = computed(() => {
-  return products.value.filter((product) => {
+  return products.filter((product) => {
     const matchesCategory =
         filters.value.categories.length === 0 || filters.value.categories.includes(product.category);
     const matchesDelivery = !filters.value.fastDelivery || true;

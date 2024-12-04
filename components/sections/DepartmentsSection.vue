@@ -1,14 +1,12 @@
 <template>
   <section :class="className" class="my-5">
-    <ProductCard v-for="product in products" :key="product.id" :product="product" />
+    <CategoryCard v-for="category in categories" :key="category.id" :category="category" />
   </section>
 </template>
 
 <script setup>
-import ProductCard from './ProductCard.vue';
-
 defineProps({
-  products: {
+  categories: {
     type: Array,
     required: true,
   },
