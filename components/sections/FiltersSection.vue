@@ -8,27 +8,28 @@
           <input
               type="checkbox"
               v-model="selectedCategories"
-              :value="category"
-              :id="'category-' + sanitizeId(category)"
+              :value="category.name"
+              :id="'category-' + category.id"
               class="mr-2 opacity-0"
               name="category"
           />
           <label
-              :for="'category-' + sanitizeId(category)"
+              :for="'category-' + category.id"
               class="text-sm lg:text-base"
-          >{{ category }}</label>
+          >{{ category.name }}</label>
         </li>
       </ul>
       <h4 class="font-semibold mb-4 py-4 border-b">Filters</h4>
-
     </div>
   </section>
 </template>
 
 <script setup>
+import { useCategory } from '~/composables/useCategory';
+
 const selectedCategories = ref([]);
-const categories = ["Wall Decor", "Wall Clocks", "Wall Shelves"];
-const sanitizeId = (str) => str.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-_]/g, '').toLowerCase();
+const { categories } = useCategory();
+
 const emit = defineEmits(["update-filters"]);
 
 watch([selectedCategories], () => {

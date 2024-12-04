@@ -4,44 +4,44 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-center items-center py-4 gap-8">
           <div
-              v-for="(menuItem, index) in mainMenu"
+              v-for="(menuItem, index) in categories"
               :key="index"
               class="relative group"
           >
             <button
-                @click="toggleMenu(menuItem.label)"
+                @click="toggleMenu(menuItem.name)"
                 class="text-gray-800 underline underline-offset-1 decoration-zinc-400"
             >
-              {{ menuItem.label }}
+              {{ menuItem.name }}
             </button>
 
             <!-- Submenu -->
             <div
-                v-if="activeMenu === menuItem.label"
+                v-if="activeMenu === menuItem.name"
                 class="absolute left-0 top-full mt-2 w-max bg-white shadow-md z-50 space-y-2 p-5 text-sm font-semibold text-gray-800 rounded-md"
             >
               <div
-                  v-for="(link, linkIndex) in menuItem.submenu"
+                  v-for="(link, linkIndex) in menuItem.subCategory"
                   :key="linkIndex"
                   class="relative group"
-                  @mouseenter="link.submenu ? activateSubmenu(linkIndex) : null"
+                  @mouseenter="link.subCategory ? activateSubmenu(linkIndex) : null"
                   @mouseleave="deactivateSubmenu"
               >
                 <button class="hover:text-gray-600 flex items-center justify-between w-full lg:w-auto">
-                  {{ link.label }}
+                  {{ link.name }}
                 </button>
                 <!-- Submenu for the category -->
                 <div
-                    v-if="link.submenu && activeSubmenu === linkIndex"
+                    v-if="link.subCategory && activeSubmenu === linkIndex"
                     class="absolute left-[calc(100%+20px)] top-0 w-40 bg-white shadow-lg border rounded-md p-2 space-y-2 text-gray-800"
                 >
                   <a
-                      v-for="(sublink, subIndex) in link.submenu"
+                      v-for="(sublink, subIndex) in link.subCategory"
                       :key="subIndex"
                       :href="sublink.href"
                       class="block text-sm hover:text-gray-600"
                   >
-                    {{ sublink.label }}
+                    {{ sublink.name }}
                   </a>
                 </div>
               </div>
@@ -55,94 +55,15 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useCategory } from '~/composables/useCategory'
+
+const { categories } = useCategory();
 
 const activeMenu = ref(null);
 const activeSubmenu = ref(null);
 
-let submenuTimeout = null;
+let subCategoryTimeout = null;
 
-const mainMenu = [
-  {
-    label: 'New',
-    submenu: [
-      {
-        label: 'New in Kitchen',
-        submenu: [
-          { label: 'New Dishes', href: '#' },
-          { label: 'New Utensils', href: '#' },
-        ],
-      },
-      {
-        label: 'New in Bedroom',
-        submenu: [
-          { label: 'New Beds', href: '#' },
-          { label: 'New Wardrobes', href: '#' },
-        ],
-      },
-      {label: 'New in Living room', href: '#'},
-      {label: 'New in Bathroom', href: '#'},
-      {label: 'New in Outdoor', href: '#'},
-      {label: 'New in Lighting', href: '#'},
-    ],
-  },
-  {
-    label: 'Good Deal',
-    submenu: [
-      {
-        label: 'For Sale',
-        submenu: [
-          { label: 'Discounted Items', href: '#' },
-          { label: 'Flash Sale', href: '#' },
-        ],
-      },
-      {
-        label: 'Last Chance',
-        submenu: [
-          { label: 'Ending Soon', href: '#' },
-          { label: 'Clearance', href: '#' },
-        ],
-      },
-    ],
-  },
-  {
-  label: 'Kitchen',
-  submenu: [
-      { label: 'Dishes', href: '#' },
-      { label: 'Glasses', href: '#' },
-      { label: 'For cooking', href: '#' },
-    ],
-  },
-  {
-    label: 'Bedroom',
-    submenu: [
-      { label: 'King size bed', href: '#' },
-      { label: 'Wardrobe', href: '#' },
-      { label: 'Nightstand', href: '#' },
-    ],
-  },
-  {
-    label: 'Living room',
-    submenu: [
-      { label: 'Sofas', href: '#' },
-      { label: 'Armchairs', href: '#' },
-    ]
-  },
-  {
-    label: 'Lighting',
-    submenu: [
-      { label: 'Chandeliers', href: '#' },
-      { label: 'Local lighting', href: '#' },
-      { label: 'Laps', href: '#' }
-    ]
-  },
-  {
-    label: 'Outdoor',
-    submenu: [
-      { label: 'Garden set', href: '#' }
-    ]
-  },
-
-];
 const toggleMenu = (menu) => {
   if (activeMenu.value === menu) {
     activeMenu.value = null;
@@ -153,15 +74,15 @@ const toggleMenu = (menu) => {
 };
 
 const activateSubmenu = (index) => {
-  if (submenuTimeout) {
-    clearTimeout(submenuTimeout);
-    submenuTimeout = null;
+  if (subCategoryTimeout) {
+    clearTimeout(subCategoryTimeout);
+    subCategoryTimeout = null;
   }
   activeSubmenu.value = index;
 };
 
 const deactivateSubmenu = () => {
-  submenuTimeout = setTimeout(() => {
+  subCategoryTimeout = setTimeout(() => {
     activeSubmenu.value = null;
   }, 300);
 };
