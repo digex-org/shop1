@@ -25,16 +25,24 @@
 
     <!-- Icons Section -->
     <div class="flex space-x-4 items-center">
-      <button class="p-2 rounded-full hover:bg-gray-100">
-        <i class="fas fa-user text-gray-700"></i>
-      </button>
+      <NuxtLink to="/signUp">
+        <button class="p-2 rounded-full hover:bg-gray-100">
+          <i class="fas fa-user text-gray-700"></i>
+        </button>
+      </NuxtLink>
       <NuxtLink to="/basket">
         <button class="p-2 rounded-full hover:bg-gray-100">
           <i class="fas fa-shopping-cart text-gray-700"></i>
         </button>
       </NuxtLink>
+      <NuxtLink to="/">
+        <button class="p-2 rounded-full hover:bg-gray-100 mr-4">
+          <i class="fa-solid fa-heart"></i>
+        </button>
+      </NuxtLink>
     </div>
   </header>
+  <MenuSection />
 </template>
 
 <script>

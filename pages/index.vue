@@ -1,6 +1,5 @@
 <template>
   <div>
-    <MenuSection />
     <SaleBannerSection />
     <SliderSection class="py-7" :items="videoSlides" :settings="videoSettings" />
     <div class="container mx-auto px-4">
@@ -8,7 +7,7 @@
       <DepartmentsSection :categories="categories" class-name="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"/>
       <SliderSection class="my-7 px-1" :items="videoSlides" :settings="videoSettings" />
       <BannerSection banner="/images/banner.webp" />
-      <SliderSection class="my-7" :items="productsSlide" :settings="imageSettings" />
+      <SliderSection class="my-7" :items="products" :settings="imageSettings" />
       <ShopBannerSection class="mb-7" background-image="images/product.webp" />
     </div>
   </div>
@@ -16,15 +15,11 @@
 
 <script setup>
 import { useCategory } from '~/composables/useCategory';
+import {useProduct} from "~/composables/useProduct.js";
 
 const { categories } = useCategory();
 
-const productsSlide = Array.from({ length: 10 }, () => ({
-  type: 'image',
-  src: '/images/product.webp',
-  currentPrice: '$1,349.00',
-  originalPrice: '$1,549.00',
-}));
+const { products } = useProduct();
 
 const videoSlides = [
   { type: 'video', src: '/videos/video.mp4', layout: 'full' },

@@ -44,8 +44,10 @@ const { products } = useProduct();
 const filteredProducts = computed(() => {
   return products.filter((product) => {
     const matchesCategory =
-        filters.value.categories.length === 0 || filters.value.categories.includes(product.category);
-    const matchesDelivery = !filters.value.fastDelivery || true;
+        filters.value.categories.length === 0 ||
+        filters.value.categories.includes(product.category);
+    const matchesDelivery = !filters.value.fastDelivery || product.isLimitedTime;
+
     return matchesCategory && matchesDelivery;
   });
 });
