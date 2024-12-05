@@ -3,12 +3,12 @@
     <ProductImageCarouselSection :images="product.images" class="w-full" />
 
     <div class="space-y-6">
-      <h1 class="text-2xl font-bold">{{ product.name }}</h1>
+      <h1 class="text-2xl font-bold">{{ product.title }}</h1>
       <p class="text-gray-500">{{ product.description }}</p>
 
       <div>
-        <span class="text-lg text-red-500 font-semibold">Sale: ${{ product.price }}</span>
-        <span class="line-through text-gray-400 text-sm ml-2">${{ product.originalPrice }}</span>
+        <span class="text-lg text-red-500 font-semibold">Sale: {{ product.price }}</span>
+        <span class="line-through text-gray-400 text-sm ml-2">{{ product.originalPrice }}</span>
       </div>
 
       <p class="text-sm text-gray-600">Arrives by {{ deliveryDate }}</p>
@@ -24,14 +24,12 @@
 <script setup>
 import { ref } from 'vue';
 
-const product = {
-  id: 1,
-  name: 'Gwennie 24" Metal Wall Clock',
-  images: ['/images/product.webp', '/images/product.webp', '/images/product.webp'],
-  description: 'A stylish wall clock for your living room.',
-  price: 85,
-  originalPrice: 99,
-};
+defineProps({
+  product: {
+    type: Object,
+    required: true
+  }
+})
 
 const deliveryDate = ref('Sun, Nov 24');
 const quantity = ref(1);

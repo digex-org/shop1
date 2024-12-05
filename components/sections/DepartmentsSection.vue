@@ -5,11 +5,11 @@
 </template>
 
 <script setup>
+
+import {useCategory} from "~/composables/useCategory.js";
+
+const { categories } = useCategory();
 defineProps({
-  categories: {
-    type: Array,
-    required: true,
-  },
   className: {
     type: String,
     required: true,

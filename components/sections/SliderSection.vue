@@ -22,15 +22,15 @@
         <!-- Image Slide -->
         <template v-else-if="item.type === 'image'">
           <img
-              :src="item.src"
+              :src="item.image"
               alt="Slide Image"
               class="w-full h-auto object-cover rounded-lg shadow-lg"
               loading="lazy"
           />
           <div class="mt-4 text-center">
-            <p class="text-lg font-bold text-gray-800">{{ item.name }}</p>
+            <p class="text-lg font-bold text-gray-800">{{ item.title }}</p>
             <p class="text-red-500 font-semibold">
-              <span class="text-xl">{{ item.currentPrice }}</span>
+              <span class="text-xl">{{ item.price }}</span>
               <span
                   v-if="item.originalPrice"
                   class="text-gray-400 ml-2 line-through"
@@ -45,13 +45,21 @@
         <template v-else>
           <div class="flex flex-col items-center">
             <img
-                :src="item.src"
+                :src="item.image"
                 alt="Product Image"
                 class="w-full h-auto object-cover mb-4 rounded-lg shadow-md"
                 loading="lazy"
             />
-            <p class="text-center text-gray-800 font-semibold">{{ item.name }}</p>
-            <p class="text-center text-gray-600">{{ item.price }}</p>
+            <p class="text-center text-gray-800 font-semibold">{{ item.title }}</p>
+            <p class="text-red-500 font-semibold">
+              <span class="text-xl">{{ item.price }}</span>
+              <span
+                  v-if="item.originalPrice"
+                  class="text-gray-400 ml-2 line-through"
+              >
+                {{ item.originalPrice }}
+              </span>
+            </p>
           </div>
         </template>
       </swiper-slide>

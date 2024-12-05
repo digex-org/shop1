@@ -2,7 +2,7 @@
   <section>
     <nav class="border-b">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-center items-center py-4 gap-8">
+        <div class="flex justify-around items-center py-4">
           <div
               v-for="(menuItem, index) in categories"
               :key="index"
