@@ -15,14 +15,14 @@ const { products } = useProduct();
 const route = useRoute();
 const product = computed(() => {
   try {
-    return route.params.product ? JSON.parse(route.params.product) : null;
+    return products.find((p) => p.id === (parseInt(route.params.product)));
   } catch (error) {
     console.error('Error parsing product:', error);
     return null;
   }
 });
 const relatedProducts = computed(() =>
-    products.filter((p) => p.name !== route.params.product)
+    products.filter((p) => p.id !== route.params.product)
 );
 
 </script>
