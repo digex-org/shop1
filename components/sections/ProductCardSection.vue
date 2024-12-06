@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="{ name: 'product-product', params: { product: JSON.stringify(product) } }">
+  <NuxtLink :to="{ name: 'product-product', params: { product: product.id } }">
     <section
         class="group relative bg-white border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-transform duration-300"
     >

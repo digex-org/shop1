@@ -4,6 +4,7 @@ export function useProduct() {
     const state = reactive({
         products: [
             {
+                id: 1,
                 image: '/images/product.webp',
                 description: 'A stylish wall clock for your living room.',
                 images: [
@@ -20,6 +21,7 @@ export function useProduct() {
                 category: 'New',
             },
             {
+                id: 2,
                 image: '/images/product.webp',
                 description: 'A stylish wall clock for your living room.',
                 images: [
@@ -36,6 +38,7 @@ export function useProduct() {
                 category: 'New',
             },
             {
+                id: 3.,
                 image: '/images/product.webp',
                 description: 'A stylish wall clock for your living room.',
                 images: [
@@ -53,6 +56,7 @@ export function useProduct() {
                 category: 'Bedroom',
             },
             {
+                id: 4,
                 image: '/images/product.webp',
                 description: 'A stylish wall clock for your living room.',
                 images: [
@@ -70,6 +74,7 @@ export function useProduct() {
                 category: 'Lighting',
             },
             {
+                id: 5,
                 image: '/images/product.webp',
                 description: 'A stylish wall clock for your living room.',
                 images: [
@@ -87,6 +92,7 @@ export function useProduct() {
                 category: 'Good Deal',
             },
             {
+                id: 5,
                 image: '/images/product.webp',
                 description: 'A stylish wall clock for your living room.',
                 images: [
@@ -104,6 +110,7 @@ export function useProduct() {
                 category: 'Good Deal',
             },
             {
+                id: 6,
                 image: '/images/product.webp',
                 description: 'A stylish wall clock for your living room.',
                 images: [
