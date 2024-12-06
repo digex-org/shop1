@@ -1,17 +1,24 @@
 <template>
   <div class="container mx-auto py-8">
-    <!-- Selected Categories -->
-    <h1 v-if="selectedCategoryNames.length" class="text-sm text-gray-600 mb-5 ml-2">
-      Selected Categories: <span class="font-semibold">{{ selectedCategoryNames }}</span>
-    </h1>
+    <div class="flex justify-between align-baseline">
+      <!-- Selected Categories -->
+      <div class="flex flex-col">
+        <h1 v-if="selectedCategoryNames.length" class="text-sm text-gray-600 mb-5 ml-2">
+          Selected Categories: <span class="font-semibold">{{ selectedCategoryNames }}</span>
+        </h1>
 
-    <button
-        @click="toggleFilters"
-        class="flex items-center justify-center gap-2 mb-4 p-2 border border-gray-300 rounded-md hover:bg-gray-100 ml-2"
-    >
-      <i class="fa-solid fa-sliders"></i>
-      {{ showFilters ? "Hide Filters" : "Show Filters" }}
-    </button>
+        <button
+            @click="toggleFilters"
+            class="flex items-center justify-center gap-2 mb-4 p-2 border border-gray-300 rounded-md hover:bg-gray-100 ml-2"
+        >
+          <i class="fa-solid fa-sliders"></i>
+          {{ showFilters ? "Hide Filters" : "Show Filters" }}
+        </button>
+      </div>
+
+      <!-- Sort By Dropdown -->
+      <SortByDropdown @update-sort="onSortUpdate" />
+    </div>
 
     <div class="flex flex-col lg:flex-row relative">
       <transition name="slide">
@@ -24,7 +31,7 @@
 
       <!-- Product Grid Section -->
       <div :class="{'w-full': !showFilters, 'lg:w-3/4': showFilters}" class="p-4">
-        <ProductGridSection :products="filteredProducts" />
+        <ProductGridSection :products="sortedProducts" />
       </div>
     </div>
   </div>
@@ -33,7 +40,9 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useProduct } from '~/composables/useProduct';
+
 const showFilters = ref(false); // Default to hidden on mobile for better UX
+const selectedSortOption = ref('recommended'); // Default sorting option
 const filters = ref({
   fastDelivery: false,
   categories: [],
@@ -41,6 +50,7 @@ const filters = ref({
 
 const { products } = useProduct();
 
+// Computed to filter products based on selected filters
 const filteredProducts = computed(() => {
   return products.filter((product) => {
     const matchesCategory =
@@ -52,12 +62,38 @@ const filteredProducts = computed(() => {
   });
 });
 
+// Sorting logic
+const sortedProducts = computed(() => {
+  let sorted = [...filteredProducts.value]; // Create a shallow copy of filtered products
+
+  if (selectedSortOption.value === 'recommended') {
+    // Sort by rating (numeric comparison)
+    sorted.sort((a, b) => b.rating - a.rating);
+  } else if (selectedSortOption.value === 'newArrivals') {
+    // Sort by date added (assuming each product has a 'dateAdded' field, otherwise, you can sort by ID or add a custom date)
+    sorted.sort((a, b) => b.id - a.id);  // Example sorting by ID as a proxy for "new arrival"
+  } else if (selectedSortOption.value === 'priceLowToHigh') {
+    // Sort by price from low to high
+    sorted.sort((a, b) => a.price - b.price);
+  } else if (selectedSortOption.value === 'priceHighToLow') {
+    // Sort by price from high to low
+    sorted.sort((a, b) => b.price - a.price);
+  }
+
+  return sorted;
+});
+
+
 const toggleFilters = () => {
   showFilters.value = !showFilters.value;
 };
 
 const onFilterUpdate = (updatedFilters) => {
   filters.value = updatedFilters;
+};
+
+const onSortUpdate = (newSortOption) => {
+  selectedSortOption.value = newSortOption;
 };
 
 const selectedCategoryNames = computed(() => {

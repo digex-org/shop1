@@ -11,7 +11,7 @@
       />
       <div class="p-4">
         <h3 class="font-medium text-base md:text-lg">{{ product.title }}</h3>
-        <p class="text-lg font-semibold text-gray-800 mt-2">{{ product.price }}</p>
+        <p class="text-lg font-semibold text-gray-800 mt-2">${{ product.price }}</p>
         <div class="flex items-center mt-2">
           <span class="text-yellow-500">&#9733;</span>
           <span class="ml-1 text-gray-500 text-sm">{{ product.rating }}</span>

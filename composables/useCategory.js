@@ -6,7 +6,7 @@ export function useCategory() {
             {
                 id: 1,
                 name: 'New',
-                image: '/images/product.webp',
+                image: '/images/new.webp',
                 subCategory: [
                     { name: 'New in Kitchen' },
                     { name: 'New in Bedroom' },
@@ -19,7 +19,7 @@ export function useCategory() {
             {
                 id: 2,
                 name: 'Good Deal',
-                image: '/images/product.webp',
+                image: '/images/goodDeal.webp',
                 subCategory: [
                     { name: 'For Sale' },
                     { name: 'Last Chance' },
@@ -28,7 +28,7 @@ export function useCategory() {
             {
                 id: 3,
                 name: 'Kitchen',
-                image: '/images/product.webp',
+                image: '/images/kitchen.webp',
                 subCategory: [
                     { name: 'Dishes' },
                     { name: 'Glasses' },
@@ -38,7 +38,7 @@ export function useCategory() {
             {
                 id: 4,
                 name: 'Bedroom',
-                image: '/images/product.webp',
+                image: '/images/bedroom.webp',
                 subCategory: [
                     { name: 'King size bed' },
                     { name: 'Wardrobe' },
@@ -48,7 +48,7 @@ export function useCategory() {
             {
                 id: 5,
                 name: 'Living room',
-                image: '/images/product.webp',
+                image: '/images/livingRoom.webp',
                 subCategory: [
                     { name: 'Sofas' },
                     { name: 'Armchairs' },
@@ -57,7 +57,7 @@ export function useCategory() {
             {
                 id: 6,
                 name: 'Lighting',
-                image: '/images/product.webp',
+                image: '/images/lighting.webp',
                 subCategory: [
                     { name: 'Chandeliers' },
                     { name: 'Local lighting' },
