@@ -8,7 +8,7 @@
       <SliderSection class="my-7 px-1" :items="videoSlides" :settings="videoSettings" />
       <BannerSection banner="/images/banner.webp" />
       <SliderSection class="my-7" :items="products" :settings="imageSettings" />
-      <ShopBannerSection class="mb-7" background-image="images/product.webp" />
+      <ShopBannerSection class="mb-7" background-image="images/banner1.webp" />
     </div>
   </div>
 </template>
