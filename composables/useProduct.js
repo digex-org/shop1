@@ -11,6 +11,9 @@ export function useProduct() {
                 rating: 4.5,
                 isLimitedTime: true,
                 category: 'New',
+                brand: "Brand A",
+                color: "black",
+                size: "M"
             },
             {
                 id: 2,
@@ -22,6 +25,9 @@ export function useProduct() {
                 rating: 4.7,
                 isLimitedTime: false,
                 category: 'New',
+                brand: "Brand A",
+                color: "blue",
+                size: "M"
             },
             {
                 id: 3,
@@ -33,6 +39,9 @@ export function useProduct() {
                 rating: 4.3,
                 isLimitedTime: true,
                 category: 'Bedroom',
+                brand: "Brand A",
+                color: "white",
+                size: "M"
             },
             {
                 id: 4,
