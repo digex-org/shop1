@@ -30,7 +30,7 @@
       </transition>
 
       <!-- Product Grid Section -->
-      <div :class="{'w-full': !showFilters, 'lg:w-3/4': showFilters}" class="p-4">
+      <div :class="{ 'w-full': !showFilters, 'lg:w-3/4': showFilters }" class="p-4">
         <ProductGridSection :products="sortedProducts" />
       </div>
     </div>
@@ -38,46 +38,69 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import { useProduct } from '~/composables/useProduct';
+const showFilters = ref(false); // Toggle filter visibility
+const selectedSortOption = ref('recommended'); // Default sorting
 
-const showFilters = ref(false); // Default to hidden on mobile for better UX
-const selectedSortOption = ref('recommended'); // Default sorting option
-const filters = ref({
-  fastDelivery: false,
+const appliedFilters = ref({
   categories: [],
+  colors: [],
+  priceRanges: [],
+  delivery: [],
 });
 
 const { products } = useProduct();
 
-// Computed to filter products based on selected filters
+// Compute filtered products based on active filters
 const filteredProducts = computed(() => {
-  return products.filter((product) => {
-    const matchesCategory =
-        filters.value.categories.length === 0 ||
-        filters.value.categories.includes(product.category);
-    const matchesDelivery = !filters.value.fastDelivery || product.isLimitedTime;
+  return products.filter(product => {
+    let passesFilter = true;
 
-    return matchesCategory && matchesDelivery;
+    if (appliedFilters.value.categories.length > 0) {
+      passesFilter = passesFilter && appliedFilters.value.categories.includes(product.category);
+    }
+
+    if (appliedFilters.value.colors.length > 0) {
+      passesFilter = passesFilter && appliedFilters.value.colors.some(color => {
+        return color.trim().toLowerCase() === (product.color || '').trim().toLowerCase();
+      });
+    }
+
+    if (appliedFilters.value.priceRanges.length > 0) {
+      passesFilter = passesFilter && appliedFilters.value.priceRanges.some(range => {
+        if (range === 'under-50') return product.price < 50;
+        if (range === '50-100') return product.price >= 50 && product.price <= 100;
+        if (range === 'above-100') return product.price > 100;
+        return false;
+      });
+    }
+
+    if (appliedFilters.value.delivery.length > 0) {
+      passesFilter = passesFilter && appliedFilters.value.delivery.includes('fast-delivery')
+          ? product.isLimitedTime
+          : true;
+    }
+
+    return passesFilter;
   });
 });
 
-// Sorting logic
+// Compute sorted products
 const sortedProducts = computed(() => {
-  let sorted = [...filteredProducts.value]; // Create a shallow copy of filtered products
+  let sorted = [...filteredProducts.value];
 
-  if (selectedSortOption.value === 'recommended') {
-    // Sort by rating (numeric comparison)
-    sorted.sort((a, b) => b.rating - a.rating);
-  } else if (selectedSortOption.value === 'newArrivals') {
-    // Sort by date added (assuming each product has a 'dateAdded' field, otherwise, you can sort by ID or add a custom date)
-    sorted.sort((a, b) => b.id - a.id);  // Example sorting by ID as a proxy for "new arrival"
-  } else if (selectedSortOption.value === 'priceLowToHigh') {
-    // Sort by price from low to high
-    sorted.sort((a, b) => a.price - b.price);
-  } else if (selectedSortOption.value === 'priceHighToLow') {
-    // Sort by price from high to low
-    sorted.sort((a, b) => b.price - a.price);
+  switch (selectedSortOption.value) {
+    case 'recommended':
+      sorted.sort((a, b) => b.rating - a.rating);
+      break;
+    case 'newArrivals':
+      sorted.sort((a, b) => b.id - a.id); // Example sorting by ID as a proxy for "new arrivals"
+      break;
+    case 'priceLowToHigh':
+      sorted.sort((a, b) => a.price - b.price);
+      break;
+    case 'priceHighToLow':
+      sorted.sort((a, b) => b.price - a.price);
+      break;
   }
 
   return sorted;
@@ -89,7 +112,7 @@ const toggleFilters = () => {
 };
 
 const onFilterUpdate = (updatedFilters) => {
-  filters.value = updatedFilters;
+  appliedFilters.value = updatedFilters;
 };
 
 const onSortUpdate = (newSortOption) => {
@@ -97,14 +120,14 @@ const onSortUpdate = (newSortOption) => {
 };
 
 const selectedCategoryNames = computed(() => {
-  return filters.value.categories.length > 0
-      ? filters.value.categories.join(', ')
+  return appliedFilters.value.categories.length > 0
+      ? appliedFilters.value.categories.join(', ')
       : 'None';
 });
 </script>
 
 <style scoped>
-/* Slide-in animation for filters */
+/* Slide-in animation */
 .slide-enter-active,
 .slide-leave-active {
   transition: all 0.3s ease;
