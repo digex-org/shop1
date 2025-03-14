@@ -1,6 +1,5 @@
 <!-- app.vue -->
 <template>
-  <!-- Global head elements -->
   <Head>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
@@ -15,13 +14,7 @@
   </NuxtLayout>
 </template>
 
-<script setup lang="ts">
-  // Global setup can go here if needed.
-</script>
 
-<style>
-  /* Global styles (optional) */
-</style>
 
 
   

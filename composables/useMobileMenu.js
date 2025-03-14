@@ -9,7 +9,7 @@ export function useMobileMenu() {
       {
         id: 1,
         name: 'Mobile',
-        url: '/new',
+        url: '/',
         image: new URL('~/assets/images/category2.webp', import.meta.url).href,
         text: 'See More',
         texturl: '/newest',
