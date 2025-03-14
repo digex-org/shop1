@@ -18,4 +18,12 @@ export default defineNuxtConfig({
     },
   ],
   plugins: ['~/plugins/fontawesome.js'],
+  nitro: {
+    prerender: {
+      // Remove "cache: false" since it's not a valid property
+    },
+    output: {
+      publicDir: '.output/public',
+    },
+  },
 })
