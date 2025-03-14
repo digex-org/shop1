@@ -1,16 +1,15 @@
 <template>
-  <div>
     <SaleBannerSection />
     <SliderSection class="py-7" :items="videoSlides" :settings="videoSettings" />
-    <div class="container mx-auto px-4">
-      <h3 class="text-center font-bold text-xl mt-8">Shop by Department</h3>
-      <DepartmentsSection :categories="categories" class-name="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"/>
-      <SliderSection class="my-7 px-1" :items="videoSlides" :settings="videoSettings" />
-      <BannerSection banner="/images/banner.webp" />
+      <DepartmentsSection :categories="categories" class-name="flex flex-wrap justify-center gap-6"/>
+ 
+      <SliderSection class="flex items-center justify-center relative py-12 px-6 bg-white" :items="videoSlides" :settings="videoSettings" />
+      <NewProductsCategory :categories="categories" class-name="flex flex-wrap justify-center py-12 px-6 gap-6"/>
+      <BannerSection banner="/images/banner/banner-2.jpg" />
       <SliderSection class="my-7" :items="products" :settings="imageSettings" />
-      <ShopBannerSection class="mb-7" background-image="images/banner1.webp" />
-    </div>
-  </div>
+      <!-- <ShopBannerSection  background-image="/images/backgrounds/home-2.jpg" /> -->
+      <BannerNextSection banner="/images/backgrounds/home-2.jpg" />
+      <NewsletterSection banner="/images/backgrounds/home-3.jpg" />
 </template>
 
 <script setup>

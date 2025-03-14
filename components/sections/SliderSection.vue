@@ -49,26 +49,18 @@
 
         <!-- Product Slide -->
         <template v-else>
-          <div class="group relative">
+          <div class="group relative border border-gray-300 hover:border-gray-500 p-4">
             <NuxtLink :to="{ name: 'product-product', params: { product: item.id } }">
-              <div class="flex flex-col items-center">
-                <img
-                    :src="item.image"
-                    alt="Product Image"
-                    class="w-64 h-64 h-auto object-cover mb-4 rounded-lg shadow-md"
-                    loading="lazy"
-                />
-                <p class="text-center text-gray-800 font-semibold">{{ item.title }}</p>
-                <p class="text-red-500 font-semibold">
-                  <span class="text-xl">${{ item.price }}</span>
-                  <span
-                      v-if="item.originalPrice"
-                      class="text-gray-400 ml-2 line-through"
-                  >
-                    ${{ item.originalPrice }}
-                  </span>
-                </p>
-              </div>
+              <div class="flex flex-col items-start hover:border-gray-500">
+                  <img :src="item.image" alt="Product Image" class="w-[439px] h-[210px] object-cover mb-4" loading="lazy" />
+                  <p class="text-gray-800 font-semibold">{{ item.title }}</p>
+                  <p class="text-winered font-semibold">
+                    <span class="text-xl">${{ item.price }}</span>
+                    <span v-if="item.originalPrice"  class="text-gray-400 ml-2 line-through">
+                      ${{ item.originalPrice }}
+                    </span>
+                  </p>
+                </div>
             </NuxtLink>
 
             <div class="absolute top-2 right-2 flex flex-col items-center opacity-0 group-hover transition-opacity duration-300">
@@ -77,7 +69,7 @@
                   @click.stop="addToWishlist(item)"
                   class="transparent p-2 rounded-full shadow-lg hover-icon"
               >
-                <i class="fas fa-heart text-white"></i>
+                <i class="fas fa-heart text-black"></i>
               </button>
 
               <!-- Basket Icon -->
@@ -85,7 +77,7 @@
                   @click.stop="addToBasket(item)"
                   class="transparent p-2 rounded-full shadow-lg hover-icon"
               >
-                <i class="fas fa-shopping-cart text-white"></i>
+                <i class="fas fa-shopping-cart text-black"></i>
               </button>
 
               <!-- Quick View Icon -->
@@ -93,7 +85,7 @@
                   @click.stop="openQuickView(item)"
                   class="transparent p-2 rounded-full shadow-lg hover-icon"
               >
-                <i class="fas fa-eye text-white"></i>
+                <i class="fas fa-eye text-black"></i>
               </button>
             </div>
           </div>
@@ -128,7 +120,7 @@ const props = defineProps({
     default: () => ({}),
   },
 });
-console.log('item type', props.items);
+
 // Determine if the current slide type is "product"
 const isProductSlide = computed(() =>
     props.items.some(item => item.image && item.price) // Check if item has an image and price
@@ -171,9 +163,60 @@ const addToBasket = (item) => {
 </script>
 
 <style scoped>
-.swiper-container {
+::v-deep .swiper-container {
   width: 100%;
   overflow: hidden;
+}
+::v-deep .swiper-slide {
+  margin-right: 10px !important;
+}
+
+::v-deep .carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  ::v-deep .carousel::-webkit-scrollbar {
+    display: none;
+  }
+  ::v-deep .swiper-button-next, 
+  ::v-deep .swiper-button-prev {
+    color: rgb(39, 37, 37) !important; /* Button icon color */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    width: 40px !important; /* Adjusted size of the circle to account for padding */
+    height: 40px !important;
+
+}
+
+::v-deep .swiper-button-next:after, 
+::v-deep .swiper-button-prev:after {
+    font-size: 18px !important; /* Icon size */
+    background-color: aliceblue; /* Circle background color */
+    border-radius: 50%; /* Makes the background circular */
+    display: flex; /* Centers the icon */
+    align-items: center;
+    justify-content: center;
+    width: 40px !important; /* Adjusted size of the circle to account for padding */
+    height: 40px !important;
+    padding: 5px; /* Added padding for better spacing around the icon */
+    transition: transform 0.3s ease; /* Smooth scaling effect for hover */
+}
+
+::v-deep .swiper-button-next:hover, 
+::v-deep .swiper-button-prev:hover {
+    background-color: aliceblue; /* Circle background color */
+    border-radius: 50%; /* Makes the background circular */
+    display: flex; /* Centers the icon */
+    align-items: center;
+    justify-content: center;
+    color: #000; /* Change icon color on hover for better contrast */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+::v-deep .swiper-button-next:hover:after, 
+::v-deep .swiper-button-prev:hover:after {
+    transform: scale(1.2); /* Scales the icon on hover */
 }
 
 .group:hover .group-hover {
@@ -189,16 +232,4 @@ const addToBasket = (item) => {
   color: gray;
 }
 
-.swiper-button-next,
-.swiper-button-prev {
-  background-color: #226dfb; /* Button color */
-  color: white; /* Icon color */
-  padding: 10px;
-  border-radius: 50%; /* Circular buttons */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: background-color 0.3s ease;
-  z-index: 10;
-}
 </style>

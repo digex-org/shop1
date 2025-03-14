@@ -11,7 +11,7 @@
     <div v-else class="flex flex-col md:flex-row">
       <!-- Cart Items Section -->
       <div class="w-full lg:w-3/4 pr-0 lg:pr-8 mb-8 lg:mb-0">
-        <h1 class="text-2xl font-semibold mb-6">My Cart</h1>
+        <h1 class="text-2xl font-serif font-semibold mb-6">My Cart</h1>
 
           <CartItem v-for="product in cartItems" :key="product.sku" :product="product" />
           <div class="mt-8">

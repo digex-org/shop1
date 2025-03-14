@@ -1,5 +1,5 @@
 <template>
-  <section :class="className" class="my-5">
+  <section :class="className" class="container  px-4 my-8">
     <CategoryCard v-for="category in categories" :key="category.id" :category="category" />
   </section>
 </template>
@@ -17,5 +17,4 @@ defineProps({
 });
 </script>
 
-<style scoped>
-</style>
+

@@ -7,8 +7,11 @@ import AppFooter from "~/components/AppFooter.vue";
 <template>
   <div>
     <AppHeader />
+    <MainMenu />
+    <MobileMenu />
       <slot />
     <AppFooter />
+    <ScrollToTopButton />
   </div>
 </template>
 

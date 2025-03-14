@@ -79,6 +79,18 @@ export function useProduct() {
                 isLimitedTime: true,
                 category: 'Living Room',
             },
+            {
+                id: 6,
+                image: '/images/livingProduct.webp',
+                description: 'A stylish wall clock for your living room.',
+                images: ['/images/product.webp', '/images/product.webp', '/images/product.webp'],
+                title: 'Tillie 2.1" Wood Wall Clock',
+                price: 75,
+                originalPrice: 175,
+                rating: 4.3,
+                isLimitedTime: true,
+                category: 'Living Room',
+            },
         ]
     });
 

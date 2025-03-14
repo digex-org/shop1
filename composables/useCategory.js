@@ -6,7 +6,7 @@ export function useCategory() {
             {
                 id: 1,
                 name: 'New',
-                image: '/images/new.webp',
+                image: '/images/categories/section-1.jpg',
                 subCategory: [
                     { name: 'New in Kitchen' },
                     { name: 'New in Bedroom' },
@@ -19,7 +19,7 @@ export function useCategory() {
             {
                 id: 2,
                 name: 'Good Deal',
-                image: '/images/goodDeal.webp',
+                image: '/images/categories/section-2.jpg',
                 subCategory: [
                     { name: 'For Sale' },
                     { name: 'Last Chance' },
@@ -28,7 +28,7 @@ export function useCategory() {
             {
                 id: 3,
                 name: 'Kitchen',
-                image: '/images/kitchen.webp',
+                image: '/images/categories/section-3.jpg',
                 subCategory: [
                     { name: 'Dishes' },
                     { name: 'Glasses' },
@@ -38,7 +38,7 @@ export function useCategory() {
             {
                 id: 4,
                 name: 'Bedroom',
-                image: '/images/bedroom.webp',
+                image: '/images/categories/section-4.jpg',
                 subCategory: [
                     { name: 'King size bed' },
                     { name: 'Wardrobe' },
@@ -48,7 +48,7 @@ export function useCategory() {
             {
                 id: 5,
                 name: 'Living room',
-                image: '/images/livingRoom.webp',
+                image: '/images/categories/section-5.jpg',
                 subCategory: [
                     { name: 'Sofas' },
                     { name: 'Armchairs' },
@@ -57,7 +57,47 @@ export function useCategory() {
             {
                 id: 6,
                 name: 'Lighting',
-                image: '/images/lighting.webp',
+                image: '/images/categories/section-6.jpg',
+                subCategory: [
+                    { name: 'Chandeliers' },
+                    { name: 'Local lighting' },
+                    { name: 'Lamps' },
+                ],
+            },
+            {
+                id: 7,
+                name: 'Decor',
+                image: '/images/categories/section-7.jpg',
+                subCategory: [
+                    { name: 'Chandeliers' },
+                    { name: 'Local lighting' },
+                    { name: 'Lamps' },
+                ],
+            },
+            {
+                id: 8,
+                name: 'Interior',
+                image: '/images/categories/section-8.jpg',
+                subCategory: [
+                    { name: 'Chandeliers' },
+                    { name: 'Local lighting' },
+                    { name: 'Lamps' },
+                ],
+            },
+            {
+                id: 9,
+                name: 'Holly',
+                image: '/images/categories/section-9.jpg',
+                subCategory: [
+                    { name: 'Chandeliers' },
+                    { name: 'Local lighting' },
+                    { name: 'Lamps' },
+                ],
+            },
+            {
+                id: 10,
+                name: 'Rug',
+                image: '/images/categories/section-10.jpg',
                 subCategory: [
                     { name: 'Chandeliers' },
                     { name: 'Local lighting' },

@@ -1,104 +1,120 @@
+<!-- components/layout/MainMenu.vue -->
 <template>
-  <section>
-    <nav class="border-b">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-around items-center py-4">
-          <div
-              v-for="(menuItem, index) in categories"
-              :key="index"
-              class="relative group"
+  <nav class="bg-white shadow relative">
+    <!-- Horizontal Navigation Bar -->
+    <div class="w-full bg-white">
+      <div class="max-w-[1440px] mx-auto h-16 flex items-center px-4">
+        <ul class="flex justify-center space-x-8 w-full">
+          <li
+            v-for="menu in menus"
+            :key="menu.id"
+            class="relative"
+            @mouseenter="setActiveMenu(menu)"
+            @mouseleave="clearActiveMenu"
           >
-            <button
-                @click="toggleMenu(menuItem.name)"
-                class="text-gray-800 underline underline-offset-1 decoration-zinc-400"
+            <NuxtLink
+              :to="menu.url"
+              class="font-medium text-gray-800 text-lg hover:text-blue-600"
             >
-              {{ menuItem.name }}
-            </button>
-
-            <!-- Submenu -->
-            <div
-                v-if="activeMenu === menuItem.name"
-                class="absolute left-0 top-full mt-2 w-max bg-white shadow-md z-50 space-y-2 p-5 text-sm font-semibold text-gray-800 rounded-md"
-            >
+              {{ menu.name }}
+            </NuxtLink>
+            
+            <!-- Mega Menu Dropdown inside the same li -->
+            <transition name="fade">
               <div
-                  v-for="(link, linkIndex) in menuItem.subCategory"
-                  :key="linkIndex"
-                  class="relative group"
-                  @mouseenter="link.subCategory ? activateSubmenu(linkIndex) : null"
-                  @mouseleave="deactivateSubmenu"
+                v-if="activeMenu && activeMenu.id === menu.id && activeMenu.subMenu && activeMenu.subMenu.length"
+                class="absolute left-0 top-full w-full bg-white shadow-lg z-20"
               >
-                <button class="hover:text-gray-600 flex items-center justify-between w-full lg:w-auto">
-                  {{ link.name }}
-                </button>
-                <!-- Submenu for the category -->
-                <div
-                    v-if="link.subCategory && activeSubmenu === linkIndex"
-                    class="absolute left-[calc(100%+20px)] top-0 w-40 bg-white shadow-lg border rounded-md p-2 space-y-2 text-gray-800"
-                >
-                  <a
-                      v-for="(sublink, subIndex) in link.subCategory"
-                      :key="subIndex"
-                      :href="sublink.href"
-                      class="block text-sm hover:text-gray-600"
+                <div class="max-w-[1440px] mx-auto py-6 grid grid-cols-4 gap-x-6 min-h-[400px] px-4">
+                  <!-- Columns 1-3: Sub-menu Groups -->
+                  <div
+                    v-for="(group, index) in activeMenu.subMenu.slice(0, 3)"
+                    :key="index"
+                    class="space-y-4"
                   >
-                    {{ sublink.name }}
-                  </a>
+                    <!-- Group Header with Arrow -->
+                    <div class="flex items-center justify-between px-4 py-2">
+                      <h4 class="text-xl font-bold text-gray-800">
+                        {{ group.name }}
+                      </h4>
+                      <svg
+                        class="w-5 h-5 text-gray-600"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                    <!-- List of Subcategories -->
+                    <ul class="px-4 space-y-2">
+                      <li
+                        v-for="(item, idx) in group.subMenu"
+                        :key="idx"
+                      >
+                        <NuxtLink
+                          :to="item.url"
+                          class="text-base text-gray-600 hover:text-blue-600"
+                        >
+                          {{ item.name }}
+                        </NuxtLink>
+                      </li>
+                    </ul>
+                    <!-- Bottom Link in First Column -->
+                    <div v-if="index === 0" class="px-4">
+                      <NuxtLink
+                        to="https://andmain.com"
+                        class="text-blue-600 text-sm font-medium hover:underline"
+                      >
+                        See More &rarr;
+                      </NuxtLink>
+                    </div>
+                  </div>
+                  <!-- Column 4: Visual Element -->
+                  <div class="hidden lg:flex flex-col items-center justify-start px-4">
+                    <img
+                      :src="menu.image"
+                      :alt="menu.name"
+                      class="w-[360px] h-[280px] object-cover rounded"
+                    />
+                    <p class="mt-2 text-sm text-gray-600 text-center">
+                      Explore our curated collection
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
+            </transition>
+          </li>
+        </ul>
       </div>
-    </nav>
-  </section>
+    </div>
+  </nav>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import { useCategory } from '~/composables/useCategory'
+import { useMainMenu } from '~/composables/useMainMenu';
 
-const { categories } = useCategory();
-
+const { menus } = useMainMenu();
 const activeMenu = ref(null);
-const activeSubmenu = ref(null);
 
-let subCategoryTimeout = null;
-
-const toggleMenu = (menu) => {
-  if (activeMenu.value === menu) {
-    activeMenu.value = null;
-  } else {
-    activeMenu.value = menu;
-  }
-  activeSubmenu.value = null;
+const setActiveMenu = (menu) => {
+  activeMenu.value = menu;
 };
 
-const activateSubmenu = (index) => {
-  if (subCategoryTimeout) {
-    clearTimeout(subCategoryTimeout);
-    subCategoryTimeout = null;
-  }
-  activeSubmenu.value = index;
-};
-
-const deactivateSubmenu = () => {
-  subCategoryTimeout = setTimeout(() => {
-    activeSubmenu.value = null;
-  }, 300);
+const clearActiveMenu = () => {
+  activeMenu.value = null;
 };
 </script>
 
 <style scoped>
-.relative .absolute {
-  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+/* Fade transition for the mega menu */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
 }
-.hidden {
-  visibility: hidden;
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
-.block {
-  visibility: visible;
-  opacity: 1;
-}
 </style>
-
