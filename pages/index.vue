@@ -1,20 +1,19 @@
 <template>
-    <SaleBannerSection />
+    <SaleBannerSection :backgroundImage="customImage" />
     <SliderSection class="py-7" :items="videoSlides" :settings="videoSettings" />
-      <DepartmentsSection :categories="categories" class-name="flex flex-wrap justify-center gap-6"/>
- 
-      <SliderSection class="flex items-center justify-center relative py-12 px-6 bg-white" :items="videoSlides" :settings="videoSettings" />
-      <NewProductsCategory :categories="categories" class-name="flex flex-wrap justify-center py-12 px-6 gap-6"/>
-      <BannerSection banner="/images/banner/banner-2.jpg" />
-      <SliderSection class="my-7" :items="products" :settings="imageSettings" />
-      <!-- <ShopBannerSection  background-image="/images/backgrounds/home-2.jpg" /> -->
-      <BannerNextSection banner="/images/backgrounds/home-2.jpg" />
-      <NewsletterSection banner="/images/backgrounds/home-3.jpg" />
+    <DepartmentsSection :categories="categories" class-name="flex flex-wrap justify-center gap-6"/>
+    <SliderSection class="flex items-center justify-center relative py-12 px-6 bg-white" :items="videoSlides" :settings="videoSettings" />
+    <NewProductsCategory :categories="categories" class-name="flex flex-wrap justify-center py-12 px-6 gap-6"/>
+    <BannerSection banner='/images/banner/banner-2.jpg' alt-text="Hero banner for public template" />
+    <SliderSection class="my-7" :items="products" :settings="imageSettings" />
+    <BannerNextSection banner="/images/backgrounds/home-2.jpg" alt-text="BannerNextSection img" />
+    <NewsletterSection banner="/images/backgrounds/home-3.jpg" alt-text="Newsletter img" />
 </template>
 
 <script setup>
 import { useCategory } from '~/composables/useCategory';
 import {useProduct} from "~/composables/useProduct.js";
+import customImage from '~/assets/images/backgrounds/home-1.png';
 
 const { categories } = useCategory();
 

@@ -12,4 +12,4 @@
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
-  </template>
+ </template>

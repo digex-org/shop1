@@ -163,60 +163,60 @@ const addToBasket = (item) => {
 </script>
 
 <style scoped>
-::v-deep .swiper-container {
+:deep(.swiper-container) {
   width: 100%;
   overflow: hidden;
 }
-::v-deep .swiper-slide {
+:deep(.swiper-slide) {
   margin-right: 10px !important;
 }
 
-::v-deep .carousel {
-    display: flex;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-  }
-  ::v-deep .carousel::-webkit-scrollbar {
-    display: none;
-  }
-  ::v-deep .swiper-button-next, 
-  ::v-deep .swiper-button-prev {
-    color: rgb(39, 37, 37) !important; /* Button icon color */
-    transition: all 0.3s ease; /* Smooth transition for hover effects */
-    width: 40px !important; /* Adjusted size of the circle to account for padding */
-    height: 40px !important;
-
+:deep(.carousel) {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+:deep(.carousel::-webkit-scrollbar) {
+  display: none;
 }
 
-::v-deep .swiper-button-next:after, 
-::v-deep .swiper-button-prev:after {
-    font-size: 18px !important; /* Icon size */
-    background-color: aliceblue; /* Circle background color */
-    border-radius: 50%; /* Makes the background circular */
-    display: flex; /* Centers the icon */
-    align-items: center;
-    justify-content: center;
-    width: 40px !important; /* Adjusted size of the circle to account for padding */
-    height: 40px !important;
-    padding: 5px; /* Added padding for better spacing around the icon */
-    transition: transform 0.3s ease; /* Smooth scaling effect for hover */
+:deep(.swiper-button-next),
+:deep(.swiper-button-prev) {
+  color: rgb(39, 37, 37) !important;
+  transition: all 0.3s ease;
+  width: 40px !important;
+  height: 40px !important;
 }
 
-::v-deep .swiper-button-next:hover, 
-::v-deep .swiper-button-prev:hover {
-    background-color: aliceblue; /* Circle background color */
-    border-radius: 50%; /* Makes the background circular */
-    display: flex; /* Centers the icon */
-    align-items: center;
-    justify-content: center;
-    color: #000; /* Change icon color on hover for better contrast */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+:deep(.swiper-button-next:after),
+:deep(.swiper-button-prev:after) {
+  font-size: 18px !important;
+  background-color: rgb(0, 0, 0);
+  color:rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px !important;
+  height: 40px !important;
+  padding: 5px;
+  transition: transform 0.3s ease;
 }
 
-::v-deep .swiper-button-next:hover:after, 
-::v-deep .swiper-button-prev:hover:after {
-    transform: scale(1.2); /* Scales the icon on hover */
+:deep(.swiper-button-next:hover),
+:deep(.swiper-button-prev:hover) {
+  background-color: aliceblue;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+:deep(.swiper-button-next:hover:after),
+:deep(.swiper-button-prev:hover:after) {
+  transform: scale(1.2);
 }
 
 .group:hover .group-hover {
@@ -231,5 +231,5 @@ const addToBasket = (item) => {
 .hover-icon:hover i.fa-eye {
   color: gray;
 }
-
 </style>
+

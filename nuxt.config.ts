@@ -1,4 +1,3 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
@@ -19,11 +18,14 @@ export default defineNuxtConfig({
   ],
   plugins: ['~/plugins/fontawesome.js'],
   nitro: {
-    prerender: {
-      // Remove "cache: false" since it's not a valid property
-    },
+    prerender: {},
     output: {
       publicDir: '.output/public',
     },
   },
-})
+  vite: {
+    build: {
+      assetsInlineLimit: 10000,
+    },
+  },
+});
