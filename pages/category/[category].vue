@@ -1,18 +1,19 @@
 <template>
-  <div class="container mx-auto py-8">
-    <div class="flex justify-between align-baseline">
-      <!-- Selected Categories -->
+  <main class="container mx-auto py-8">
+    <!-- Controls: Selected Categories and Filter Toggle -->
+    <div class="flex justify-between items-baseline">
       <div class="flex flex-col">
         <h1 v-if="selectedCategoryNames.length" class="text-sm text-gray-600 mb-5 ml-2">
           Selected Categories: <span class="font-semibold">{{ selectedCategoryNames }}</span>
         </h1>
-
         <button
-            @click="toggleFilters"
-            class="flex items-center justify-center gap-2 mb-4 p-2 border border-gray-300 rounded-md hover:bg-gray-100 ml-2"
+          @click="toggleFilters"
+          :aria-expanded="showFilters"
+          aria-controls="filter-panel"
+          class="flex items-center justify-center gap-2 mb-4 p-2 border border-gray-300 rounded-md hover:bg-gray-100 ml-2"
         >
-          <i class="fa-solid fa-sliders"></i>
-          {{ showFilters ? "Hide Filters" : "Show Filters" }}
+          <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+          <span>{{ showFilters ? "Hide Filters" : "Show Filters" }}</span>
         </button>
       </div>
 
@@ -21,11 +22,13 @@
     </div>
 
     <div class="flex flex-col lg:flex-row relative">
+      <!-- Filters Section: Using v-if with v-model to maintain state -->
       <transition name="slide">
         <FiltersSection
-            v-if="showFilters"
-            @update-filters="onFilterUpdate"
-            class="absolute z-10 bg-white shadow-lg p-4 w-full lg:relative lg:shadow-none lg:w-1/4 lg:block"
+          v-if="showFilters"
+          id="filter-panel"
+          v-model:filters="appliedFilters"
+          class="absolute z-10 bg-white shadow-lg p-4 w-full lg:relative lg:shadow-none lg:w-1/4 lg:block"
         />
       </transition>
 
@@ -34,14 +37,24 @@
         <ProductGridSection :products="sortedProducts" />
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
-<script setup>
-const showFilters = ref(false); // Toggle filter visibility
-const selectedSortOption = ref('recommended'); // Default sorting
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import { useProduct } from '~/composables/useProduct';
 
-const appliedFilters = ref({
+interface Filters {
+  categories: string[];
+  colors: string[];
+  priceRanges: string[];
+  delivery: string[];
+}
+
+// Reactive state for filters and sorting
+const showFilters = ref(false);
+const selectedSortOption = ref('recommended');
+const appliedFilters = ref<Filters>({
   categories: [],
   colors: [],
   priceRanges: [],
@@ -50,21 +63,22 @@ const appliedFilters = ref({
 
 const { products } = useProduct();
 
-// Compute filtered products based on active filters
+// Compute filtered products based on applied filters
 const filteredProducts = computed(() => {
   return products.filter(product => {
     let passesFilter = true;
-
+    
+    // Category filter
     if (appliedFilters.value.categories.length > 0) {
       passesFilter = passesFilter && appliedFilters.value.categories.includes(product.category);
     }
-
+    // Color filter
     if (appliedFilters.value.colors.length > 0) {
-      passesFilter = passesFilter && appliedFilters.value.colors.some(color => {
-        return color.trim().toLowerCase() === (product.color || '').trim().toLowerCase();
-      });
+      passesFilter = passesFilter && appliedFilters.value.colors.some((color: string) =>
+        color.trim().toLowerCase() === (product.color || '').trim().toLowerCase()
+      );
     }
-
+    // Price range filter
     if (appliedFilters.value.priceRanges.length > 0) {
       passesFilter = passesFilter && appliedFilters.value.priceRanges.some(range => {
         if (range === 'under-50') return product.price < 50;
@@ -73,27 +87,26 @@ const filteredProducts = computed(() => {
         return false;
       });
     }
-
+    // Delivery filter (example: fast-delivery)
     if (appliedFilters.value.delivery.length > 0) {
-      passesFilter = passesFilter && appliedFilters.value.delivery.includes('fast-delivery')
-          ? product.isLimitedTime
-          : true;
+      passesFilter = passesFilter && (appliedFilters.value.delivery.includes('fast-delivery')
+        ? product.isLimitedTime
+        : true);
     }
-
+    
     return passesFilter;
   });
 });
 
-// Compute sorted products
+// Compute sorted products based on the selected sort option
 const sortedProducts = computed(() => {
   let sorted = [...filteredProducts.value];
-
   switch (selectedSortOption.value) {
     case 'recommended':
       sorted.sort((a, b) => b.rating - a.rating);
       break;
     case 'newArrivals':
-      sorted.sort((a, b) => b.id - a.id); // Example sorting by ID as a proxy for "new arrivals"
+      sorted.sort((a, b) => b.id - a.id);
       break;
     case 'priceLowToHigh':
       sorted.sort((a, b) => a.price - b.price);
@@ -102,37 +115,33 @@ const sortedProducts = computed(() => {
       sorted.sort((a, b) => b.price - a.price);
       break;
   }
-
   return sorted;
 });
 
-
+// Toggle filter panel visibility
 const toggleFilters = () => {
   showFilters.value = !showFilters.value;
 };
 
-const onFilterUpdate = (updatedFilters) => {
-  appliedFilters.value = updatedFilters;
-};
-
-const onSortUpdate = (newSortOption) => {
+// Handler for sort update from SortByDropdown
+const onSortUpdate = (newSortOption: string) => {
   selectedSortOption.value = newSortOption;
 };
 
+// Compute selected category names for display
 const selectedCategoryNames = computed(() => {
   return appliedFilters.value.categories.length > 0
-      ? appliedFilters.value.categories.join(', ')
-      : 'None';
+    ? appliedFilters.value.categories.join(', ')
+    : 'None';
 });
 </script>
 
 <style scoped>
-/* Slide-in animation */
+/* Slide-in animation for the filter panel */
 .slide-enter-active,
 .slide-leave-active {
   transition: all 0.3s ease;
 }
-
 .slide-enter-from,
 .slide-leave-to {
   transform: translateX(-100%);
