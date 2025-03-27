@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+
 import {useCart} from "~/composables/useCart.js";
 
 const { removeItem } = useCart();
