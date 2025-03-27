@@ -1,5 +1,7 @@
 <template>
   <main class="container mx-auto py-8">
+    <!-- SEO Meta Tags for the category page are set in the script -->
+    
     <!-- Controls: Selected Categories and Filter Toggle -->
     <div class="flex justify-between items-baseline">
       <div class="flex flex-col">
@@ -22,7 +24,7 @@
     </div>
 
     <div class="flex flex-col lg:flex-row relative">
-      <!-- Filters Section: Using v-if with v-model to maintain state -->
+      <!-- Filters Section: Using v-if with a transition -->
       <transition name="slide">
         <FiltersSection
           v-if="showFilters"
@@ -42,14 +44,32 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { useHead } from '#imports';
 import { useProduct } from '~/composables/useProduct';
 
+// Define the Filters interface
 interface Filters {
   categories: string[];
   colors: string[];
   priceRanges: string[];
   delivery: string[];
 }
+
+// Set up dynamic SEO meta tags for this category page
+useHead({
+  title: 'Category - Elegant Furniture For Best Homes',
+  meta: [
+    { name: 'description', content: 'Browse our curated selection of elegant furniture categories.' },
+    // Open Graph tags
+    { property: 'og:title', content: 'Category - Elegant Furniture' },
+    { property: 'og:description', content: 'Browse our curated selection of elegant furniture categories.' },
+    { property: 'og:type', content: 'website' },
+    // Twitter Card tags
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: 'Category - Elegant Furniture' },
+    { name: 'twitter:description', content: 'Browse our curated selection of elegant furniture categories.' },
+  ]
+});
 
 // Reactive state for filters and sorting
 const showFilters = ref(false);
@@ -67,7 +87,6 @@ const { products } = useProduct();
 const filteredProducts = computed(() => {
   return products.filter(product => {
     let passesFilter = true;
-    
     // Category filter
     if (appliedFilters.value.categories.length > 0) {
       passesFilter = passesFilter && appliedFilters.value.categories.includes(product.category);
@@ -93,7 +112,6 @@ const filteredProducts = computed(() => {
         ? product.isLimitedTime
         : true);
     }
-    
     return passesFilter;
   });
 });
@@ -121,6 +139,11 @@ const sortedProducts = computed(() => {
 // Toggle filter panel visibility
 const toggleFilters = () => {
   showFilters.value = !showFilters.value;
+};
+
+// Handler for when FiltersSection emits an update event
+const onFilterUpdate = (updatedFilters: Filters) => {
+  appliedFilters.value = updatedFilters;
 };
 
 // Handler for sort update from SortByDropdown
