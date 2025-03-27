@@ -27,12 +27,7 @@
 
         <!-- Image Slide -->
         <template v-else-if="item.type === 'image'">
-          <img
-              :src="item.image"
-              alt="Slide Image"
-              class="w-64 h-64 h-auto object-cover rounded-lg shadow-lg"
-              loading="lazy"
-          />
+          <NuxtImg :src="item.image" alt="Slide Image"  class="w-64 h-64 h-auto object-cover rounded-lg shadow-lg" />
           <div class="mt-4 text-center">
             <p class="text-lg font-bold text-gray-800">{{ item.title }}</p>
             <p class="text-red-500 font-semibold">
@@ -52,7 +47,7 @@
           <div class="group relative border border-gray-300 hover:border-gray-500 p-4">
             <NuxtLink :to="{ name: 'product-product', params: { product: item.id } }">
               <div class="flex flex-col items-start hover:border-gray-500">
-                  <img :src="item.image" alt="Product Image" class="w-[439px] h-[210px] object-cover mb-4" loading="lazy" />
+                  <NuxtImg :src="item.image" alt="Product Image" class="w-[439px] h-[210px] object-cover mb-4"  />
                   <p class="text-gray-800 font-semibold">{{ item.title }}</p>
                   <p class="text-winered font-semibold">
                     <span class="text-xl">${{ item.price }}</span>

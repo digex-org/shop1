@@ -18,6 +18,10 @@ export default {
        letterSpacing: {
         widests: '1.1em',
       },
+      container: {
+        center: true,
+        padding: '1rem',
+      },
       fontFamily: {
         // Use Playfair Display for serif styles (e.g., headings)
         serif: ['"Playfair Display"', 'serif'],
