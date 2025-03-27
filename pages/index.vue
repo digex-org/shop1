@@ -1,4 +1,8 @@
 <template>
+    <Head>
+      <title>{{ title }}</title>
+      <meta name="description" :content="description" />
+    </Head>
     <SaleBannerSection :backgroundImage="customImage" />
     <SliderSection class="py-7" :items="videoSlides" :settings="videoSettings" />
     <DepartmentsSection :categories="categories" class-name="flex flex-wrap justify-center gap-6"/>
@@ -10,11 +14,12 @@
     <NewsletterSection banner="/images/backgrounds/home-3.jpg" alt-text="Newsletter img" />
 </template>
 
-<script setup>
+<script setup >
 import { useCategory } from '~/composables/useCategory';
 import {useProduct} from "~/composables/useProduct.js";
 import customImage from '~/assets/images/backgrounds/home-1.png';
-
+import { useSeo } from '~/composables/useSeo';
+const { title, description } = useSeo('Home - Elegant Furniture', 'Welcome to our collection of elegant furniture.');
 const { categories } = useCategory();
 
 const { products } = useProduct();
