@@ -7,12 +7,12 @@
 
   <!-- Modular sections: each component is responsible for its own content and styling -->
   <SaleBannerSection :backgroundImage="customImage" />
-  <SliderSection class="py-7" :items="videoSlides" :settings="videoSettings" />
-  <DepartmentsSection :categories="categories" class-name="flex flex-wrap justify-center gap-6" />
-  <SliderSection class="flex items-center justify-center relative py-12 px-6 bg-white" :items="videoSlides" :settings="videoSettings" />
-  <NewProductsCategory :categories="categories" class-name="flex flex-wrap justify-center py-12 px-6 gap-6" />
+  <SliderSection :items="videoSlides" :settings="videoSettings" />
+  <DepartmentsSection :categories="categories" />
+  <SliderSection class="container" :items="videoSlides" :settings="videoSettings" />
+  <NewProductsCategory :categories="categories" />
   <BannerSection banner="/images/banner/banner-2.jpg" alt-text="Hero banner for public template" />
-  <SliderSection class="my-7" :items="products" :settings="imageSettings" />
+  <SliderSection class="container" :items="products" :settings="imageSettings" />
   <BannerNextSection banner="/images/backgrounds/home-2.jpg" alt-text="BannerNextSection img" />
   <NewsletterSection banner="/images/backgrounds/home-3.jpg" alt-text="Newsletter img" />
 </template>

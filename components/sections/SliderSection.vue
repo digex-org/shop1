@@ -1,5 +1,5 @@
 <template>
-  <section class="swiper-container w-full relative">
+  <section class="swiper-container py-7 w-full relative">
     <swiper
         v-bind="settings"
         :modules="isProductSlide ? [Navigation] : []"
@@ -44,9 +44,9 @@
 
         <!-- Product Slide -->
         <template v-else>
-          <div class="group relative border border-gray-300 hover:border-gray-500 p-4">
+          <div class="group relative p-4">
             <NuxtLink :to="{ name: 'product-product', params: { product: item.id } }">
-              <div class="flex flex-col items-start hover:border-gray-500">
+              <div class="flex flex-col items-start ">
                   <NuxtImg :src="item.image" alt="Product Image" class="w-[439px] h-[210px] object-cover mb-4"  />
                   <p class="text-gray-800 font-semibold">{{ item.title }}</p>
                   <p class="text-winered font-semibold">

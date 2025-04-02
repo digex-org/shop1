@@ -1,5 +1,5 @@
 <template>
-    <section class="py-12 px-6 bg-white flex items-center justify-center">
+    <section class="container py-12 px-6 bg-white flex items-center justify-center">
       <!-- Constrained Container -->
       <div class="py-6 relative w-full mx-auto">
         <!-- Background Image -->
