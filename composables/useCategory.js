@@ -104,6 +104,26 @@ export function useCategory() {
                     { name: 'Lamps' },
                 ],
             },
+            {
+                id: 11,
+                name: 'Rug',
+                image: '/images/categories/section-6.jpg',
+                subCategory: [
+                    { name: 'Chandeliers' },
+                    { name: 'Local lighting' },
+                    { name: 'Lamps' },
+                ],
+            },
+            {
+                id: 12,
+                name: 'Rug',
+                image: '/images/categories/section-5.jpg',
+                subCategory: [
+                    { name: 'Chandeliers' },
+                    { name: 'Local lighting' },
+                    { name: 'Lamps' },
+                ],
+            },
         ],
     });
 

@@ -1,5 +1,5 @@
 <template>
-  <section  class="container flex flex-wrap justify-center gap-8">
+  <section  class="container flex flex-wrap justify-center gap-6">
     <CategoryCard v-for="category in categories" :key="category.id" :category="category" />
   </section>
 </template>
