@@ -14,6 +14,7 @@ export default {
         lemonlime: '#D7FF68',
         customYellow: '#D79E4D',
         winered: '#7E142E',
+        bloodred: '#9f1a1a40',
        },
        letterSpacing: {
         widests: '1.1em',

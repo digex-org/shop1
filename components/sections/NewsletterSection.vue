@@ -1,9 +1,9 @@
 <template>
-    <section class="container py-12 px-6 bg-white flex items-center justify-center">
+    <section class="container py-7  bg-white flex items-center justify-center">
       <!-- Constrained Container -->
       <div class="py-6 relative w-full mx-auto">
         <!-- Background Image -->
-        <NuxtImg :src="banner"  :alt="altText"  loading="lazy" class="absolute inset-0 w-full h-full object-cover" />
+        <NuxtImg :src="banner"  :alt="altText"   class="absolute inset-0 w-full h-full object-cover" />
 
         <!-- Overlay Content -->
         <div class="relative z-10 text-white p-6 ml-20 flex flex-col md:flex-row md:items-center md:space-x-4">
@@ -14,17 +14,18 @@
 
           <!-- Form & Instructional Text Container -->
           <div class="flex flex-col w-1/2  mt-4 md:mt-0">
-            <form class="flex">
+            <form class="flex flex-col sm:flex-row">
               <input 
                 type="email" 
                 placeholder="DROP YOUR EMAIL HERE" 
-                class="w-full  px-4 py-2 focus:outline-none text-gray-700" 
+                class="w-full px-4 py-2 focus:outline-none text-gray-700 mb-2 sm:mb-0" 
                 required
               >
               <button type="submit" class="bg-customYellow hover:bg-orange-600 text-white px-6 py-2 font-semibold">
                 <i class="fa-solid fa-arrow-right"></i>
               </button>
             </form>
+
             
             <!-- Instructional Text Under the Form -->
             <p class="mt-1">

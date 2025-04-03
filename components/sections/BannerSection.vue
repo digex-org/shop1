@@ -1,5 +1,5 @@
 <template>
-  <section class="container flex items-center justify-center relative py-12 px-6 bg-white" >
+  <section class="container flex items-center justify-center relative py-7 bg-white" >
     <NuxtImg :src="banner" :alt="altText" priority class="inset-0 w-full h-full object-cover" />
   </section>
 </template>

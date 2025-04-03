@@ -12,6 +12,7 @@
   <SliderSection class="container" :items="videoSlides" :settings="videoSettings" />
   <NewProductsCategory :categories="categories" />
   <BannerSection banner="/images/banner/banner-2.jpg" alt-text="Hero banner for public template" />
+  <TextSection title="100+ New Arrivals Just Dropped" linkText="Shop all"  linkUrl="/category/New"  />
   <SliderSection class="container" :items="products" :settings="imageSettings" />
   <BannerNextSection banner="/images/backgrounds/home-2.jpg" alt-text="BannerNextSection img" />
   <NewsletterSection banner="/images/backgrounds/home-3.jpg" alt-text="Newsletter img" />
