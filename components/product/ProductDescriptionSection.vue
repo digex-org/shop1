@@ -1,40 +1,53 @@
 <template>
   <section class="p-4">
     <SectionTitle :title="'About this item'" />
+
     <!-- Tabs Navigation -->
-    <div class="flex flex-wrap border-b gap-2 sm:gap-0">
+    <nav class="flex flex-wrap border-b gap-2 sm:gap-0" role="tablist" aria-label="Product details tabs">
       <button
-          v-for="(tab, index) in tabs"
-          :key="index"
-          :class="[
+        v-for="(tab, index) in tabs"
+        :key="index"
+        role="tab"
+        :id="`tab-${index}`"
+        :aria-selected="activeTab === index"
+        :class="[
           'px-4 py-2 text-sm sm:text-base font-medium focus:outline-none',
           activeTab === index
             ? 'border-b-2 border-black text-black'
             : 'text-gray-500 hover:text-black'
         ]"
-          @click="changeTab(index)"
+        @click="changeTab(index)"
       >
         {{ tab.name }}
       </button>
-    </div>
+    </nav>
 
+    <!-- Tab Panels -->
     <div class="mt-4">
-      <!-- Description Tab -->
-      <div v-if="activeTab === 0">
+      <!-- Description Tab Panel -->
+      <div
+        v-if="activeTab === 0"
+        role="tabpanel"
+        :aria-labelledby="`tab-0`"
+      >
         <p class="text-gray-700 text-sm sm:text-base leading-relaxed">
           {{ tabs[0].content }}
         </p>
       </div>
-      <!-- Details & Dimensions Tab -->
-      <div v-if="activeTab === 1">
+      <!-- Details & Dimensions Tab Panel -->
+      <div
+        v-if="activeTab === 1"
+        role="tabpanel"
+        :aria-labelledby="`tab-1`"
+      >
         <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
           <div>
             <h3 class="text-lg font-semibold mb-2">Features</h3>
             <ul class="space-y-1">
               <li
-                  v-for="(feature, index) in tabs[1].features"
-                  :key="index"
-                  class="text-gray-700 text-sm sm:text-base"
+                v-for="(feature, index) in tabs[1].features"
+                :key="index"
+                class="text-gray-700 text-sm sm:text-base"
               >
                 <span class="font-semibold">{{ feature.label }}:</span> {{ feature.value }}
               </li>
@@ -44,9 +57,9 @@
             <h3 class="text-lg font-semibold mb-2">Dimensions</h3>
             <ul class="space-y-1">
               <li
-                  v-for="(dimension, index) in tabs[1].dimensions"
-                  :key="index"
-                  class="text-gray-700 text-sm sm:text-base"
+                v-for="(dimension, index) in tabs[1].dimensions"
+                :key="index"
+                class="text-gray-700 text-sm sm:text-base"
               >
                 <span class="font-semibold">{{ dimension.label }}:</span> {{ dimension.value }}
               </li>
@@ -54,8 +67,12 @@
           </div>
         </div>
       </div>
-      <!-- Shipping & Returns Tab -->
-      <div v-if="activeTab === 2">
+      <!-- Shipping & Returns Tab Panel -->
+      <div
+        v-if="activeTab === 2"
+        role="tabpanel"
+        :aria-labelledby="`tab-2`"
+      >
         <p class="text-gray-700 text-sm sm:text-base leading-relaxed">
           {{ tabs[2].content }}
         </p>
@@ -73,11 +90,10 @@ const tabs = [
   {
     name: "Description",
     content:
-        "The best part about this sleek, minimalist wall clock? It's easy to pair with almost any decor. " +
-        "It has a wooden center and a dark rustic metal hoop with matching black hands, which keep a numberless account " +
-        "of the time. It includes a metal keyhole hanger to attach easily and securely to your wall, and it arrives fully" +
-        " assembled. It can also be propped up against a wall, too. This clock requires a single AA battery, which is" +
-        " not included.",
+      "The best part about this sleek, minimalist wall clock? It's easy to pair with almost any decor. " +
+      "It has a wooden center and a dark rustic metal hoop with matching black hands, which keep a numberless account " +
+      "of the time. It includes a metal keyhole hanger to attach easily and securely to your wall, and it arrives fully " +
+      "assembled. It can also be propped up against a wall, too. This clock requires a single AA battery, which is not included.",
     isStructured: false,
   },
   {
@@ -109,8 +125,8 @@ const tabs = [
   {
     name: "Shipping & Returns",
     content:
-        "Ships within 3-5 business days. Returns accepted within 30 days of delivery." +
-        " Customer is responsible for return shipping costs.",
+      "Ships within 3-5 business days. Returns accepted within 30 days of delivery. " +
+      "Customer is responsible for return shipping costs.",
     isStructured: false,
   },
 ];
@@ -119,3 +135,16 @@ const changeTab = (index) => {
   activeTab.value = index;
 };
 </script>
+
+<style scoped>
+/* Transition for Tab Panels */
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.3s ease;
+}
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+</style>
