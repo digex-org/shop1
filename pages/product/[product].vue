@@ -25,7 +25,9 @@ interface Product {
   category: string;
   color?: string;
   description?: string;
-  // ...other properties
+  title: string;
+  images: string[];
+    // ...other properties
 }
 
 const { products } = useProduct();

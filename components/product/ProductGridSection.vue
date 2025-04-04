@@ -24,6 +24,12 @@ interface Product {
   title: string;
   description?: string;
   price: number;
+  originalPrice?: number;
+  rating?: number;
+  isLimitedTime?: boolean;
+  category?: string;
+  color?: string;
+  images?: string[];
   image?: string;
   // Add any additional properties as needed
 }

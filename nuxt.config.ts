@@ -50,4 +50,7 @@ export default defineNuxtConfig({
       assetsInlineLimit: 10000,
     },
   },
+  build: {
+    transpile: ['@fortawesome/vue-fontawesome']
+  },
 });

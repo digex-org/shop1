@@ -13,7 +13,7 @@
         <p class="text-lg font-semibold text-gray-800 mt-2">${{ product.price }}</p>
         <div class="flex items-center mt-2">
           <!-- Star rating with aria-label for accessibility -->
-          <span class="text-yellow-500" aria-hidden="true">&#9733;</span>
+          <span class="text-gray-500" aria-hidden="true">&#9733;</span>
           <span class="ml-1 text-gray-500 text-sm" aria-label="Rating">{{ product.rating }}</span>
         </div>
         <!-- Limited Time Badge -->
